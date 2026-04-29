@@ -1,1 +1,228 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Muhammad Nouman</title>
 
+<style>
+body {
+  margin:0;
+  font-family: 'Segoe UI', sans-serif;
+  background:#0a0f1c;
+  color:white;
+}
+
+/* NAV */
+nav {
+  display:flex;
+  justify-content:space-between;
+  padding:20px 60px;
+}
+nav h2 {color:#4ea1ff;}
+nav a {
+  color:white;
+  margin-left:20px;
+  text-decoration:none;
+}
+
+/* HERO */
+.hero {
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:60px;
+}
+
+.hero img {
+  width:320px;
+  border-radius:20px;
+  box-shadow:0 0 40px #2563eb;
+}
+
+.hero-text h1 {
+  font-size:48px;
+}
+
+.hero-text span {
+  color:#4ea1ff;
+}
+
+.tag {
+  background:#1e293b;
+  padding:8px 15px;
+  border-radius:20px;
+  display:inline-block;
+  margin:10px 0;
+}
+
+.info {
+  margin-top:15px;
+  color:#9ca3af;
+}
+
+/* SECTIONS */
+.grid {
+  display:grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px,1fr));
+  gap:20px;
+  padding:40px;
+}
+
+.card {
+  background:#111827;
+  padding:25px;
+  border-radius:15px;
+  transition:0.3s;
+}
+
+.card:hover {
+  transform:translateY(-5px);
+}
+
+h3 {color:#4ea1ff;}
+
+/* SKILLS */
+.skills span {
+  background:#1e293b;
+  padding:8px 12px;
+  margin:5px;
+  display:inline-block;
+  border-radius:20px;
+}
+
+/* CERTS */
+.cert a {
+  display:block;
+  margin:8px 0;
+  color:#60a5fa;
+  text-decoration:none;
+}
+
+/* FOOTER */
+footer {
+  text-align:center;
+  padding:20px;
+  color:#aaa;
+}
+</style>
+
+</head>
+
+<body>
+
+<nav>
+  <h2>Nouman.</h2>
+  <div>
+    <a href="#">Home</a>
+    <a href="#skills">Skills</a>
+    <a href="#contact">Contact</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <img src="yourphoto.jpg" alt="Nouman">
+
+  <div class="hero-text">
+    <h1>Muhammad <span>Nouman</span></h1>
+    <div class="tag">Project Management Student</div>
+
+    <p>
+      Dedicated Project Management student with strong academic foundation and practical exposure through internships and certifications. Passionate about innovation, startups, and execution.
+    </p>
+
+    <div class="info">
+      📧 numanjan5257@gmail.com <br>
+      📱 +92 3269682746 <br>
+      📍 Punjab, Pakistan
+    </div>
+  </div>
+</section>
+
+<!-- TOP CARDS -->
+<div class="grid">
+  <div class="card">
+    <h3>About Me</h3>
+    <p>
+      Motivated Project Management student passionate about leadership, innovation, and solving real-world problems.
+    </p>
+  </div>
+
+  <div class="card">
+    <h3>Career Goal</h3>
+    <p>
+      To gain global exposure and build strong expertise in project management and operations.
+    </p>
+  </div>
+
+  <div class="card">
+    <h3>Education</h3>
+    <p>
+      BS Project Management <br>
+      2022 – 2026 <br>
+      CGPA: 3.17
+    </p>
+  </div>
+</div>
+
+<!-- EXPERIENCE + SKILLS -->
+<div class="grid">
+  <div class="card">
+    <h3>Work Experience</h3>
+    <p><strong>Project Manager – Excelerate</strong></p>
+    <ul>
+      <li>XLab Global Summit work</li>
+      <li>Managed timelines</li>
+      <li>Budgeting & planning</li>
+      <li>Team collaboration</li>
+    </ul>
+  </div>
+
+  <div class="card" id="skills">
+    <h3>Skills</h3>
+    <div class="skills">
+      <span>Project Management</span>
+      <span>Strategic Planning</span>
+      <span>MS Project</span>
+      <span>Data Analysis</span>
+      <span>Risk Management</span>
+      <span>Creative Thinking</span>
+    </div>
+  </div>
+</div>
+
+<!-- CERTIFICATIONS -->
+<div class="grid">
+  <div class="card cert">
+    <h3>Certifications</h3>
+
+    <a href="#" target="_blank">Foundations of Project Management</a>
+    <a href="#" target="_blank">Project Initiation</a>
+    <a href="#" target="_blank">Project Planning</a>
+    <a href="#" target="_blank">Project Execution</a>
+    <a href="#" target="_blank">Agile Project Management</a>
+    <a href="#" target="_blank">Capstone Project</a>
+
+    <a href="#" target="_blank">Time Management</a>
+    <a href="#" target="_blank">Excel Training</a>
+    <a href="#" target="_blank">Leadership Foundations</a>
+  </div>
+</div>
+
+<!-- CONTACT -->
+<div class="grid" id="contact">
+  <div class="card">
+    <h3>Contact</h3>
+    <p>Email: numanjan5257@gmail.com</p>
+    <p>Phone: +92 3269682746</p>
+    <p>Location: Punjab, Pakistan</p>
+  </div>
+</div>
+
+<footer>
+  © 2026 Muhammad Nouman
+</footer>
+
+</body>
+</html>
