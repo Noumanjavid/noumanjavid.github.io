@@ -1,97 +1,168 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Muhammad Nouman | Portfolio</title>
-<link rel="stylesheet" href="style.css">
+  <title>Muhammad Nouman Portfolio</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<!-- AOS -->
-<link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+  <style>
+    body {
+      font-family: Arial;
+      background: #0f172a;
+      color: white;
+      margin: 0;
+      line-height: 1.6;
+    }
 
-<!-- Typed.js -->
-<script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+    header {
+      text-align: center;
+      padding: 60px;
+      background: linear-gradient(135deg,#2563eb,#9333ea);
+    }
 
+    header h1 {
+      margin: 0;
+      font-size: 2.5rem;
+    }
+
+    section {
+      padding: 30px;
+      max-width: 900px;
+      margin: auto;
+    }
+
+    h2 {
+      color: #38bdf8;
+      border-bottom: 2px solid #38bdf8;
+      padding-bottom: 5px;
+    }
+
+    .card {
+      background: #1e293b;
+      padding: 20px;
+      border-radius: 10px;
+      margin-top: 15px;
+      transition: 0.3s;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+    }
+
+    ul {
+      padding-left: 20px;
+    }
+
+    .skills span {
+      display: inline-block;
+      background: #1e293b;
+      padding: 10px 15px;
+      margin: 5px;
+      border-radius: 20px;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      background: #020617;
+    }
+  </style>
 </head>
+
 <body>
 
-<!-- NAVBAR -->
-<nav>
-    <h2>Nouman</h2>
-    <ul>
-        <li><a href="#about">About</a></li>
-        <li><a href="#experience">Experience</a></li>
-        <li><a href="#skills">Skills</a></li>
-        <li><a href="#contact">Contact</a></li>
-    </ul>
-</nav>
-
-<!-- HERO -->
 <header>
-    <h1>MUHAMMAD NOUMAN</h1>
-    <p><span id="typing"></span></p>
-    <a href="#" class="btn">Download CV</a>
+  <h1>MUHAMMAD NOUMAN</h1>
+  <p>Project Management Student | Future Entrepreneur</p>
 </header>
 
-<section id="about" data-aos="fade-up">
-    <h2>About Me</h2>
-    <p>
-        Dedicated Project Management student with strong academic and practical experience.
-        Passionate about innovation, startups, and global opportunities.
-    </p>
+<section>
+  <h2>Profile</h2>
+  <p>
+    Dedicated Project Management student with a strong academic foundation and practical exposure through internships and professional certifications. Demonstrates leadership, organizational, and analytical skills with a commitment to continuous learning. Interested in global opportunities to enhance expertise in project management, operations, and innovation.
+  </p>
 </section>
 
-<section id="experience" data-aos="fade-up">
-    <h2>Experience</h2>
-    <div class="card">
-        <h3>Project Manager – Excelerate Internship</h3>
-        <p>July 2025 – August 2025</p>
-        <ul>
-            <li>Worked on XLab Global Event</li>
-            <li>Managed timelines and coordination</li>
-            <li>Handled budgeting and planning</li>
-        </ul>
-    </div>
+<section>
+  <h2>Career Goal</h2>
+  <p>
+    To pursue opportunities that enhance my knowledge and skills in project management and operations while contributing to innovative projects and gaining global exposure in a dynamic environment.
+  </p>
 </section>
 
-<section id="skills" data-aos="fade-up">
-    <h2>Skills</h2>
-    <div class="skills">
-        <span>Project Management</span>
-        <span>MS Project</span>
-        <span>Data Analysis</span>
-        <span>Risk Management</span>
-        <span>Strategic Planning</span>
-    </div>
+<section>
+  <h2>Work Experience</h2>
+  <div class="card">
+    <h3>Project Manager – Excelerate Internship</h3>
+    <p><strong>July 2025 – August 2025</strong></p>
+    <ul>
+      <li>Assisted in planning and execution of XLab: The Global Experience Summit</li>
+      <li>Coordinated timelines and deliverables with team members</li>
+      <li>Worked on budgeting, documentation, and risk planning</li>
+      <li>Collaborated with cross-functional teams to meet deadlines</li>
+    </ul>
+  </div>
 </section>
 
-<section id="contact" data-aos="fade-up">
-    <h2>Contact</h2>
-    <p>Email: numanjan5257@gmail.com</p>
-    <p>Phone: +92-3269682746</p>
+<section>
+  <h2>Education</h2>
+  <div class="card">
+    <h3>BS Project Management</h3>
+    <p>2022 – 2026 (8th Semester)</p>
+    <p>CGPA: 3.17</p>
+  </div>
+</section>
+
+<section>
+  <h2>Skills</h2>
+  <div class="skills">
+    <span>Project Management</span>
+    <span>Strategic Planning</span>
+    <span>MS Project</span>
+    <span>Crisis Management</span>
+    <span>Creative Thinking</span>
+    <span>Data Analysis</span>
+    <span>Risk Management</span>
+    <span>Product Management</span>
+    <span>Change Management</span>
+  </div>
+</section>
+
+<section>
+  <h2>Certifications</h2>
+  <div class="card">
+    <ul>
+      <li><strong>Foundations of Project Management</strong> – Coursera (Google Project Management Certificate)</li>
+      <li><strong>Project Initiation: Starting a Successful Project</strong> – Coursera</li>
+      <li><strong>Project Planning: Putting It All Together</strong> – Coursera</li>
+      <li><strong>Project Execution: Running the Project</strong> – Coursera</li>
+      <li><strong>Agile Project Management</strong> – Coursera</li>
+      <li><strong>Capstone: Applying Project Management in the Real World</strong> – Coursera</li>
+
+      <li><strong>Project Management Foundations</strong> – LinkedIn Learning</li>
+      <li><strong>Time Management Fundamentals</strong> – LinkedIn Learning</li>
+      <li><strong>Excel Essential Training</strong> – LinkedIn Learning</li>
+      <li><strong>Communication Skills for Project Managers</strong> – LinkedIn Learning</li>
+      <li><strong>Leadership Foundations</strong> – LinkedIn Learning</li>
+    </ul>
+  </div>
+</section>
+
+<section>
+  <h2>Languages</h2>
+  <p>English | Urdu</p>
+</section>
+
+<section>
+  <h2>Contact</h2>
+  <p>📞 +92-3269682746</p>
+  <p>✉️ numanjan5257@gmail.com</p>
+  <p>📍 Punjab, Pakistan</p>
 </section>
 
 <footer>
-    <p>© 2026 Muhammad Nouman</p>
+  <p>© 2026 Muhammad Nouman</p>
 </footer>
-
-<!-- Scripts -->
-<script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
-<script>
-AOS.init({ duration: 1000, once: true });
-
-// Typing effect
-var typed = new Typed("#typing", {
-    strings: [
-        "Project Management Student",
-        "Future Entrepreneur",
-        "Building Digital Solutions"
-    ],
-    typeSpeed: 50,
-    backSpeed: 25,
-    loop: true
-});
-</script>
 
 </body>
 </html>
