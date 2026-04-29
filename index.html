@@ -6,32 +6,44 @@
     <title>Muhammad Nouman - Portfolio</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
         :root {
-            --bg-color: #070B14;
-            --card-bg: #111827;
-            --card-border: #1F2937;
-            --text-primary: #F3F4F6;
-            --text-secondary: #9CA3AF;
-            --accent-blue: #3B82F6;
-            --accent-purple: #8B5CF6;
-            --pill-bg: #1E293B;
+            --bg-color: #05080f;
+            --card-bg: #0f1623;
+            --card-border: #1e293b;
+            --card-border-hover: rgba(59, 130, 246, 0.4);
+            --text-primary: #f8fafc;
+            --text-secondary: #94a3b8;
+            --accent-blue: #3b82f6;
+            --accent-blue-light: #60a5fa;
+            --accent-purple: #8b5cf6;
+            --shadow-sm: 0 4px 20px rgba(0, 0, 0, 0.3);
+            --shadow-lg: 0 10px 30px rgba(0, 0, 0, 0.5);
         }
 
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            font-family: 'Inter', sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
         }
 
         body {
             background-color: var(--bg-color);
             color: var(--text-primary);
-            line-height: 1.6;
+            line-height: 1.7;
+            background-image: 
+                radial-gradient(circle at 10% 0%, rgba(59, 130, 246, 0.05) 0%, transparent 40%),
+                radial-gradient(circle at 90% 100%, rgba(139, 92, 246, 0.05) 0%, transparent 40%);
         }
 
         .container {
-            max-width: 1200px;
+            max-width: 1150px;
             margin: 0 auto;
             padding: 2rem;
         }
@@ -41,12 +53,13 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding-bottom: 2rem;
+            padding: 1rem 0 3rem 0;
         }
 
         .logo {
-            font-size: 1.5rem;
-            font-weight: 700;
+            font-size: 1.75rem;
+            font-weight: 800;
+            letter-spacing: -0.5px;
         }
 
         .logo span {
@@ -55,76 +68,127 @@
 
         .nav-links {
             display: flex;
-            gap: 2rem;
+            gap: 2.5rem;
             list-style: none;
         }
 
         .nav-links a {
-            color: var(--text-primary);
+            color: var(--text-secondary);
             text-decoration: none;
-            font-size: 0.9rem;
-            transition: color 0.3s;
+            font-size: 0.95rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background-color: var(--accent-blue);
+            transition: width 0.3s ease;
         }
 
         .nav-links a:hover, .nav-links a.active {
-            color: var(--accent-blue);
-            border-bottom: 2px solid var(--accent-blue);
-            padding-bottom: 4px;
+            color: var(--text-primary);
+        }
+
+        .nav-links a:hover::after, .nav-links a.active::after {
+            width: 100%;
         }
 
         .btn-download {
-            background-color: var(--accent-blue);
+            background: linear-gradient(135deg, var(--accent-blue), #2563eb);
             color: white;
             border: none;
-            padding: 0.6rem 1.2rem;
-            border-radius: 6px;
+            padding: 0.7rem 1.5rem;
+            border-radius: 8px;
             cursor: pointer;
             font-weight: 600;
             display: flex;
             align-items: center;
             gap: 0.5rem;
             text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
+        }
+
+        .btn-download:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(59, 130, 246, 0.4);
         }
 
         /* Hero Section */
         .hero {
-            background: linear-gradient(145deg, #0e1423, #070B14);
+            background: linear-gradient(145deg, #0d1320, #080c16);
             border: 1px solid var(--card-border);
-            border-radius: 20px;
-            padding: 3rem;
+            border-radius: 24px;
+            padding: 4rem;
             display: flex;
             align-items: center;
-            gap: 3rem;
-            margin-bottom: 2rem;
+            gap: 4rem;
+            margin-bottom: 2.5rem;
+            box-shadow: var(--shadow-sm);
+            position: relative;
+            overflow: hidden;
         }
 
+        /* Decorative dots in hero */
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 2rem;
+            left: 2rem;
+            width: 100px;
+            height: 100px;
+            background-image: radial-gradient(var(--card-border) 2px, transparent 2px);
+            background-size: 15px 15px;
+            opacity: 0.5;
+        }
+
+        /* Transparent Image Container styling */
         .hero-img-container {
-            width: 250px;
-            height: 250px;
+            width: 280px;
+            height: 280px;
             border-radius: 50%;
-            background: radial-gradient(circle, #1e3a8a 0%, #070B14 70%);
+            /* Deep inner glow behind the transparent PNG */
+            background: radial-gradient(circle at center, #1e3a8a 0%, #05080f 65%);
             display: flex;
-            align-items: center;
+            align-items: flex-end; /* Aligns portrait to bottom */
             justify-content: center;
             flex-shrink: 0;
+            border: 1px solid rgba(59, 130, 246, 0.2);
+            box-shadow: 0 0 40px rgba(59, 130, 246, 0.15);
+            position: relative;
+            overflow: hidden; /* Keeps cutout strictly inside circle */
         }
 
         .hero-img {
-            width: 220px;
-            height: 220px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 2px solid var(--accent-blue);
+            width: 95%; /* Adjusted for transparent cutout */
+            height: auto;
+            object-fit: contain;
+            position: relative;
+            z-index: 2;
+            filter: drop-shadow(0 -10px 15px rgba(0,0,0,0.3)); /* Adds depth to cutout */
         }
 
         .hero-content h1 {
-            font-size: 3rem;
+            font-size: 3.5rem;
             line-height: 1.1;
-            margin-bottom: 0.5rem;
+            margin-bottom: 1rem;
+            font-weight: 800;
+            letter-spacing: -1px;
         }
 
+        /* Premium gradient text */
         .hero-content h1 span {
-            color: var(--accent-blue);
+            background: linear-gradient(to right, var(--accent-blue-light), var(--accent-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: inline-block;
         }
 
         .title-pill {
@@ -132,33 +196,37 @@
             align-items: center;
             gap: 0.5rem;
             background-color: rgba(59, 130, 246, 0.1);
-            color: var(--accent-blue);
-            padding: 0.4rem 1rem;
-            border-radius: 20px;
-            font-size: 0.9rem;
-            font-weight: 600;
+            color: var(--accent-blue-light);
+            padding: 0.5rem 1.25rem;
+            border-radius: 30px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            letter-spacing: 0.5px;
             margin-bottom: 1.5rem;
             border: 1px solid rgba(59, 130, 246, 0.2);
+            text-transform: uppercase;
         }
 
         .hero-desc {
             color: var(--text-secondary);
-            margin-bottom: 1.5rem;
+            margin-bottom: 2rem;
             max-width: 600px;
+            font-size: 1rem;
         }
 
         .hero-contact {
             display: flex;
-            gap: 1.5rem;
+            gap: 2rem;
             color: var(--text-secondary);
-            font-size: 0.9rem;
-            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+            margin-bottom: 2rem;
+            font-weight: 500;
         }
 
         .hero-contact span {
             display: flex;
             align-items: center;
-            gap: 0.5rem;
+            gap: 0.6rem;
         }
 
         .hero-contact i {
@@ -171,46 +239,62 @@
         }
 
         .social-icon {
-            width: 40px;
-            height: 40px;
+            width: 45px;
+            height: 45px;
             border-radius: 50%;
-            background-color: var(--card-bg);
+            background-color: rgba(255, 255, 255, 0.03);
             border: 1px solid var(--card-border);
             display: flex;
             align-items: center;
             justify-content: center;
             color: var(--text-primary);
             text-decoration: none;
-            transition: 0.3s;
+            transition: all 0.3s ease;
+            font-size: 1.1rem;
         }
 
         .social-icon:hover {
             background-color: var(--accent-blue);
             border-color: var(--accent-blue);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(59, 130, 246, 0.4);
         }
 
-        /* Grid Layout */
+        /* Professional Cards */
         .card {
             background-color: var(--card-bg);
             border: 1px solid var(--card-border);
-            border-radius: 16px;
-            padding: 1.5rem;
+            border-radius: 20px;
+            padding: 2rem;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            border-color: var(--card-border-hover);
+            box-shadow: var(--shadow-lg);
         }
 
         .card-header {
             display: flex;
             align-items: center;
-            gap: 0.75rem;
-            margin-bottom: 1rem;
-            font-size: 1.25rem;
-            font-weight: 600;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            font-size: 1.3rem;
+            font-weight: 700;
         }
 
         .card-header i {
-            background-color: rgba(59, 130, 246, 0.1);
-            color: var(--accent-blue);
-            padding: 0.5rem;
-            border-radius: 8px;
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.2), rgba(139, 92, 246, 0.1));
+            color: var(--accent-blue-light);
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 10px;
+            border: 1px solid rgba(59, 130, 246, 0.2);
         }
 
         .grid-3 {
@@ -230,12 +314,12 @@
         /* Content Styles */
         .text-sm {
             color: var(--text-secondary);
-            font-size: 0.9rem;
+            font-size: 0.95rem;
         }
 
         .timeline-item {
             position: relative;
-            padding-left: 1.5rem;
+            padding-left: 2rem;
             margin-bottom: 1.5rem;
             border-left: 2px solid var(--card-border);
         }
@@ -243,35 +327,39 @@
         .timeline-item::before {
             content: '';
             position: absolute;
-            left: -6px;
-            top: 5px;
-            width: 10px;
-            height: 10px;
+            left: -7px;
+            top: 6px;
+            width: 12px;
+            height: 12px;
             border-radius: 50%;
             background-color: var(--accent-blue);
+            box-shadow: 0 0 10px var(--accent-blue);
         }
 
         .timeline-title {
-            font-weight: 600;
+            font-weight: 700;
             color: var(--text-primary);
+            font-size: 1.1rem;
         }
 
         .timeline-date {
-            color: var(--accent-blue);
+            color: var(--accent-blue-light);
             font-size: 0.85rem;
-            margin-bottom: 0.5rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            display: inline-block;
         }
 
         .timeline-list {
             list-style: none;
             color: var(--text-secondary);
-            font-size: 0.9rem;
+            font-size: 0.95rem;
         }
         
         .timeline-list li {
             position: relative;
-            padding-left: 1.2rem;
-            margin-bottom: 0.4rem;
+            padding-left: 1.5rem;
+            margin-bottom: 0.6rem;
         }
         
         .timeline-list li::before {
@@ -281,80 +369,133 @@
             position: absolute;
             left: 0;
             color: var(--accent-blue);
-            font-size: 0.8rem;
+            font-size: 0.9rem;
+            top: 3px;
         }
 
         .skills-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 0.75rem;
+            gap: 1rem;
         }
 
         .skill-pill {
-            background-color: var(--bg-color);
+            background-color: rgba(255, 255, 255, 0.02);
             border: 1px solid var(--card-border);
-            padding: 0.5rem 1rem;
-            border-radius: 8px;
-            font-size: 0.85rem;
+            padding: 0.75rem 1rem;
+            border-radius: 10px;
+            font-size: 0.9rem;
+            font-weight: 500;
             display: flex;
             align-items: center;
-            gap: 0.5rem;
+            gap: 0.75rem;
+            transition: all 0.3s ease;
         }
         
+        .skill-pill:hover {
+            background-color: rgba(59, 130, 246, 0.05);
+            border-color: rgba(59, 130, 246, 0.3);
+            transform: translateX(5px);
+        }
+
         .skill-pill i {
-            color: var(--accent-blue);
+            color: var(--accent-blue-light);
+            font-size: 1.1rem;
         }
 
         .cert-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 1rem;
+            gap: 1.25rem;
         }
 
         .cert-item {
-            background-color: var(--bg-color);
+            background-color: rgba(255, 255, 255, 0.02);
             border: 1px solid var(--card-border);
-            padding: 1rem;
-            border-radius: 8px;
+            padding: 1.25rem;
+            border-radius: 12px;
             display: flex;
             align-items: flex-start;
             gap: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .cert-item:hover {
+            border-color: var(--accent-blue);
+            background-color: rgba(59, 130, 246, 0.03);
         }
 
         .cert-item i {
-            color: var(--accent-blue);
-            font-size: 1.25rem;
-            margin-top: 0.2rem;
+            color: var(--accent-blue-light);
+            font-size: 1.5rem;
+            margin-top: 0.1rem;
         }
 
         .cert-content h4 {
-            font-size: 0.9rem;
-            margin-bottom: 0.2rem;
+            font-size: 0.95rem;
+            margin-bottom: 0.4rem;
+            font-weight: 600;
+            line-height: 1.3;
         }
 
         .cert-content p {
-            color: var(--text-secondary);
+            color: var(--accent-blue);
             font-size: 0.8rem;
+            font-weight: 600;
         }
 
         .lang-pill {
             display: inline-block;
-            background-color: var(--bg-color);
+            background-color: rgba(255, 255, 255, 0.05);
             border: 1px solid var(--card-border);
             padding: 0.5rem 1.5rem;
-            border-radius: 20px;
-            font-size: 0.9rem;
-            margin-right: 0.5rem;
+            border-radius: 30px;
+            font-size: 0.95rem;
+            font-weight: 500;
+            margin-right: 0.75rem;
+        }
+
+        .contact-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 0.75rem;
+            border-radius: 10px;
+            background-color: rgba(255,255,255,0.02);
+            border: 1px solid transparent;
+            transition: all 0.3s ease;
+        }
+
+        .contact-item:hover {
+            border-color: var(--card-border);
+            background-color: rgba(255,255,255,0.04);
+        }
+
+        .contact-icon {
+            width: 35px;
+            height: 35px;
+            background-color: rgba(59, 130, 246, 0.1);
+            color: var(--accent-blue-light);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         /* Footer */
         footer {
             text-align: center;
-            padding: 2rem 0;
+            padding: 2.5rem 0;
             color: var(--text-secondary);
             font-size: 0.9rem;
             border-top: 1px solid var(--card-border);
-            margin-top: 2rem;
+            margin-top: 3rem;
             position: relative;
         }
 
@@ -363,22 +504,31 @@
             right: 0;
             top: 50%;
             transform: translateY(-50%);
-            width: 40px;
-            height: 40px;
-            background-color: var(--accent-blue);
+            width: 45px;
+            height: 45px;
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
             color: white;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             text-decoration: none;
+            box-shadow: 0 4px 15px rgba(139, 92, 246, 0.4);
+            transition: all 0.3s ease;
+        }
+
+        .back-to-top:hover {
+            transform: translateY(-60%);
+            box-shadow: 0 6px 20px rgba(139, 92, 246, 0.6);
         }
 
         @media (max-width: 992px) {
-            .hero { flex-direction: column; text-align: center; }
+            .hero { flex-direction: column; text-align: center; padding: 3rem 2rem; }
+            .hero::before { display: none; }
             .hero-contact { justify-content: center; flex-wrap: wrap; }
             .social-links { justify-content: center; }
             .grid-3, .grid-2-1, .cert-grid { grid-template-columns: 1fr; }
+            .nav-links { display: none; /* Can add a hamburger menu here later */ }
         }
     </style>
 </head>
@@ -388,24 +538,24 @@
     <nav>
         <div class="logo">Nouman<span>.</span></div>
         <ul class="nav-links">
-            <li><a href="#" class="active">Home</a></li>
-            <li><a href="#">About</a></li>
-            <li><a href="#">Skills</a></li>
-            <li><a href="#">Experience</a></li>
-            <li><a href="#">Certifications</a></li>
-            <li><a href="#">Contact</a></li>
+            <li><a href="#home" class="active">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#experience">Experience</a></li>
+            <li><a href="#certifications">Certifications</a></li>
+            <li><a href="#contact">Contact</a></li>
         </ul>
         <a href="#" class="btn-download"><i class="fas fa-download"></i> Download CV</a>
     </nav>
 
-    <header class="hero">
+    <header class="hero" id="home">
         <div class="hero-img-container">
-            <img src="nouman.jpg" alt="Muhammad Nouman" class="hero-img">
+            <img src="nouman.png" alt="Muhammad Nouman" class="hero-img">
         </div>
         <div class="hero-content">
             <h1>Muhammad<br><span>Nouman</span></h1>
             <div class="title-pill"><i class="fas fa-briefcase"></i> PROJECT MANAGER</div>
-            <p class="hero-desc">Dedicated Project Management student with a strong academic foundation and practical exposure through internships and certifications. Demonstrates leadership, organizational skills, and a commitment to continuous learning. Interested in global opportunities to enhance expertise in project planning, operations, and innovation.</p>
+            <p class="hero-desc">Dedicated Project Management student with a strong academic foundation and practical exposure through internships and certifications. Demonstrates leadership, organizational skills, and a commitment to continuous learning.</p>
             <div class="hero-contact">
                 <span><i class="fas fa-envelope"></i> numanjan5257@gmail.com</span>
                 <span><i class="fas fa-phone"></i> +92 3269682746</span>
@@ -418,7 +568,7 @@
         </div>
     </header>
 
-    <div class="grid-3">
+    <div class="grid-3" id="about">
         <div class="card">
             <div class="card-header"><i class="fas fa-user"></i> About Me</div>
             <p class="text-sm">Dedicated Project Management student with a strong academic foundation and practical exposure through internships and certifications. Demonstrates leadership, organizational skills, and a commitment to continuous learning.</p>
@@ -429,13 +579,13 @@
         </div>
         <div class="card">
             <div class="card-header"><i class="fas fa-graduation-cap"></i> Education</div>
-            <p style="font-weight: 600; margin-bottom: 0.2rem;">Master of Business Management</p>
-            <p class="text-sm">Pursuing Bachelors in Project Management (8th Semester)<br>2022 – 2026<br>CGPA: 3.17</p>
+            <p style="font-weight: 700; color: var(--text-primary); margin-bottom: 0.3rem;">Master of Business Management</p>
+            <p class="text-sm">Pursuing Bachelors in Project Management (8th Semester)<br>2022 – 2026<br><span style="color: var(--accent-blue-light); font-weight: 600;">CGPA: 3.17</span></p>
         </div>
     </div>
 
     <div class="grid-2-1">
-        <div class="card">
+        <div class="card" id="experience">
             <div class="card-header"><i class="fas fa-briefcase"></i> Work Experience</div>
             <div class="timeline-item">
                 <div class="timeline-title">Project Manager – Excelerate Internship</div>
@@ -452,85 +602,85 @@
             </div>
         </div>
         
-        <div class="card">
+        <div class="card" id="skills">
             <div class="card-header"><i class="fas fa-code"></i> Skills</div>
             <div class="skills-grid">
                 <div class="skill-pill"><i class="fas fa-project-diagram"></i> Strategic Planning</div>
                 <div class="skill-pill"><i class="fas fa-tasks"></i> Ms Project</div>
-                <div class="skill-pill"><i class="fas fa-shield-alt"></i> Crisis Management</div>
+                <div class="skill-pill"><i class="fas fa-shield-alt"></i> Crisis Mgt.</div>
                 <div class="skill-pill"><i class="fas fa-lightbulb"></i> Creative Thinking</div>
                 <div class="skill-pill"><i class="fas fa-chart-line"></i> Data Analysis</div>
-                <div class="skill-pill"><i class="fas fa-exclamation-triangle"></i> Risk Management</div>
-                <div class="skill-pill"><i class="fas fa-box-open"></i> Product Management</div>
-                <div class="skill-pill"><i class="fas fa-sync-alt"></i> Change Management</div>
+                <div class="skill-pill"><i class="fas fa-exclamation-triangle"></i> Risk Mgt.</div>
+                <div class="skill-pill"><i class="fas fa-box-open"></i> Product Mgt.</div>
+                <div class="skill-pill"><i class="fas fa-sync-alt"></i> Change Mgt.</div>
             </div>
         </div>
     </div>
 
-    <div class="card" style="margin-bottom: 1.5rem;">
+    <div class="card" id="certifications" style="margin-bottom: 1.5rem;">
         <div class="card-header"><i class="fas fa-certificate"></i> Certifications</div>
         <div class="cert-grid">
             <div class="cert-item">
-                <i class="fas fa-file-alt"></i>
+                <i class="fas fa-award"></i>
                 <div class="cert-content">
                     <h4>Aha! Product Management Certificate</h4>
-                    <p>LinkedIn Learning</p>
+                    <p>LINKEDIN LEARNING</p>
                 </div>
             </div>
             <div class="cert-item">
-                <i class="fas fa-file-alt"></i>
+                <i class="fas fa-award"></i>
                 <div class="cert-content">
                     <h4>Notion: Build a Project Management Dashboard</h4>
-                    <p>LinkedIn Learning</p>
+                    <p>LINKEDIN LEARNING</p>
                 </div>
             </div>
             <div class="cert-item">
-                <i class="fas fa-file-alt"></i>
+                <i class="fas fa-award"></i>
                 <div class="cert-content">
                     <h4>Project Management Foundations: Budgets</h4>
-                    <p>LinkedIn Learning</p>
+                    <p>LINKEDIN LEARNING</p>
                 </div>
             </div>
             <div class="cert-item">
-                <i class="fas fa-file-alt"></i>
+                <i class="fas fa-award"></i>
                 <div class="cert-content">
                     <h4>Project Management Foundations: Requirements</h4>
-                    <p>LinkedIn Learning</p>
+                    <p>LINKEDIN LEARNING</p>
                 </div>
             </div>
             <div class="cert-item">
-                <i class="fas fa-file-alt"></i>
+                <i class="fas fa-award"></i>
                 <div class="cert-content">
                     <h4>Managing Project Stakeholders</h4>
-                    <p>LinkedIn Learning</p>
+                    <p>LINKEDIN LEARNING</p>
                 </div>
             </div>
             <div class="cert-item">
-                <i class="fas fa-file-alt"></i>
+                <i class="fas fa-award"></i>
                 <div class="cert-content">
                     <h4>Foundations of Project Management</h4>
-                    <p>Coursera</p>
+                    <p>COURSERA</p>
                 </div>
             </div>
             <div class="cert-item">
-                <i class="fas fa-file-alt"></i>
+                <i class="fas fa-award"></i>
                 <div class="cert-content">
                     <h4>Project Initiation: Starting a Successful Project</h4>
-                    <p>Coursera</p>
+                    <p>COURSERA</p>
                 </div>
             </div>
             <div class="cert-item">
-                <i class="fas fa-file-alt"></i>
+                <i class="fas fa-award"></i>
                 <div class="cert-content">
                     <h4>Project Planning: Putting It All Together</h4>
-                    <p>Coursera</p>
+                    <p>COURSERA</p>
                 </div>
             </div>
             <div class="cert-item">
-                <i class="fas fa-file-alt"></i>
+                <i class="fas fa-award"></i>
                 <div class="cert-content">
-                    <h4>Capstone: Applying Project Management in the Real World</h4>
-                    <p>Coursera</p>
+                    <h4>Capstone: Applying Project Mgt in the Real World</h4>
+                    <p>COURSERA</p>
                 </div>
             </div>
         </div>
@@ -539,24 +689,33 @@
     <div class="grid-2-1">
         <div class="card">
             <div class="card-header"><i class="fas fa-globe"></i> Languages</div>
-            <div>
+            <div style="margin-top: 1rem;">
                 <span class="lang-pill">English</span>
                 <span class="lang-pill">Urdu</span>
             </div>
         </div>
-        <div class="card">
+        <div class="card" id="contact">
             <div class="card-header"><i class="fas fa-paper-plane"></i> Contact Me</div>
-            <div style="display: flex; flex-direction: column; gap: 0.5rem;" class="text-sm">
-                <span><i class="fas fa-envelope" style="color: var(--accent-blue); margin-right: 0.5rem;"></i> numanjan5257@gmail.com</span>
-                <span><i class="fas fa-phone" style="color: var(--accent-blue); margin-right: 0.5rem;"></i> +92 3269682746</span>
-                <span><i class="fas fa-map-marker-alt" style="color: var(--accent-blue); margin-right: 0.5rem;"></i> Ehsan Pur, Punjab, Pakistan</span>
+            <div class="contact-list text-sm">
+                <div class="contact-item">
+                    <div class="contact-icon"><i class="fas fa-envelope"></i></div>
+                    <span>numanjan5257@gmail.com</span>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-icon"><i class="fas fa-phone"></i></div>
+                    <span>+92 3269682746</span>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-icon"><i class="fas fa-map-marker-alt"></i></div>
+                    <span>Ehsan Pur, Punjab, Pakistan</span>
+                </div>
             </div>
         </div>
     </div>
 
     <footer>
         <p>© 2026 Muhammad Nouman. All rights reserved.</p>
-        <a href="#" class="back-to-top"><i class="fas fa-arrow-up"></i></a>
+        <a href="#home" class="back-to-top"><i class="fas fa-arrow-up"></i></a>
     </footer>
 
 </div>
