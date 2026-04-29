@@ -144,6 +144,19 @@
         .nav-links a:hover { color: var(--text-main); }
         .nav-links a:hover::after { width: 100%; }
 
+        /* Initial Load Animations (Fail-safe) */
+        @keyframes loadFadeUp {
+            from { opacity: 0; transform: translateY(40px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .fade-in {
+            opacity: 0;
+            animation: loadFadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+        .delay-1 { animation-delay: 0.1s; }
+        .delay-2 { animation-delay: 0.2s; }
+        .delay-3 { animation-delay: 0.3s; }
+
         /* Floating Hero Section */
         .hero {
             min-height: 100vh;
@@ -225,6 +238,12 @@
             border: 6px solid #ffffff;
             object-fit: cover;
             transform: translateZ(30px);
+        }
+
+        @keyframes gradientRing {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
 
         /* Glass Panels */
@@ -351,7 +370,7 @@
             cursor: pointer;
         }
         
-        /* New Hover Overlay for Images */
+        /* Hover Overlay for Images */
         .cert-image-overlay {
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
@@ -371,13 +390,8 @@
             transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
-        .cert-image-wrapper:hover .cert-image-overlay {
-            opacity: 1;
-        }
-        
-        .cert-image-wrapper:hover .cert-image-overlay i {
-            transform: scale(1);
-        }
+        .cert-image-wrapper:hover .cert-image-overlay { opacity: 1; }
+        .cert-image-wrapper:hover .cert-image-overlay i { transform: scale(1); }
 
         .cert-image-wrapper .placeholder-icon {
             font-size: 3rem;
@@ -394,10 +408,7 @@
             z-index: 2;
             transition: transform 0.5s ease;
         }
-
-        .cert-card:hover .cert-image-wrapper img {
-            transform: scale(1.08);
-        }
+        .cert-card:hover .cert-image-wrapper img { transform: scale(1.08); }
 
         .cert-info { 
             padding: 1.5rem; 
@@ -453,9 +464,7 @@
             object-fit: contain;
         }
 
-        .modal.show .modal-content {
-            transform: scale(1);
-        }
+        .modal.show .modal-content { transform: scale(1); }
 
         .close-modal {
             position: absolute;
@@ -468,13 +477,9 @@
             z-index: 10001;
             cursor: pointer;
         }
+        .close-modal:hover { color: var(--primary); transform: scale(1.2); }
 
-        .close-modal:hover {
-            color: var(--primary);
-            transform: scale(1.2);
-        }
-
-        /* Scroll Animations */
+        /* Scroll Reveal Animation */
         .reveal {
             opacity: 0;
             transform: translateY(40px);
@@ -484,8 +489,6 @@
             opacity: 1;
             transform: translateY(0);
         }
-        .delay-1 { transition-delay: 0.1s; }
-        .delay-2 { transition-delay: 0.2s; }
 
         footer {
             text-align: center;
@@ -502,7 +505,6 @@
             .contact-pills { justify-content: center; }
             .nav-links { display: none; }
             .profile-wrapper { width: 300px; height: 300px; margin: 0 auto; }
-            .grid-2-col { grid-template-columns: 1fr !important; }
         }
 
         @media (max-width: 768px) {
@@ -513,6 +515,7 @@
             .cert-grid { grid-template-columns: 1fr; }
             .timeline-content h3 { font-size: 1.2rem; }
             .close-modal { top: 15px; right: 20px; font-size: 30px; }
+            .grid-2-col { grid-template-columns: 1fr !important; }
         }
     </style>
 </head>
@@ -540,11 +543,11 @@
     <div class="container">
         <section class="hero" id="home">
             <div class="hero-text">
-                <h2 class="reveal">Welcome to my universe</h2>
-                <h1 class="reveal delay-1">I am Muhammad <br>Nouman.</h1>
-                <p class="reveal delay-2">A dedicated Project Management student blending academic foundation with hands-on operational leadership. I turn complex ideas into structured, high-impact reality.</p>
+                <h2 class="fade-in">Welcome to my universe</h2>
+                <h1 class="fade-in delay-1">I am Muhammad <br>Nouman.</h1>
+                <p class="fade-in delay-2">A dedicated Project Management student blending academic foundation with hands-on operational leadership. I turn complex ideas into structured, high-impact reality.</p>
                 
-                <div class="contact-pills reveal delay-2">
+                <div class="contact-pills fade-in delay-3">
                     <a href="mailto:numanjan5257@gmail.com" style="text-decoration: none; color: inherit;">
                         <div class="contact-pill hover-target"><i class="fas fa-envelope"></i> numanjan5257@gmail.com</div>
                     </a>
@@ -553,7 +556,7 @@
                 </div>
             </div>
             
-            <div class="hero-image-container reveal">
+            <div class="hero-image-container fade-in delay-1">
                 <div class="profile-wrapper" id="tilt-profile">
                     <img src="nouman.jpg" alt="Muhammad Nouman" class="profile-img">
                 </div>
@@ -745,12 +748,10 @@
         // Check if device is touch screen
         const isTouchDevice = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0) || (navigator.msMaxTouchPoints > 0);
 
-        // 1. Custom Cursor Logic (Only run if not on touch device)
+        // 1. Custom Cursor Logic
         if (!isTouchDevice) {
             const cursorDot = document.getElementById("cursor-dot");
             const cursorOutline = document.getElementById("cursor-outline");
-            
-            // Added .cert-image-wrapper to hover targets so the cursor expands over images
             const hoverTargets = document.querySelectorAll('.hover-target, a, .skill-bubble, .cert-image-wrapper');
 
             window.addEventListener("mousemove", function (e) {
@@ -758,4 +759,104 @@
                 const posY = e.clientY;
                 cursorDot.style.left = `${posX}px`;
                 cursorDot.style.top = `${posY}px`;
-                cursorOutline.animate({ left: `${posX}px`, top: `${posY}px
+                cursorOutline.animate({ left: `${posX}px`, top: `${posY}px` }, { duration: 500, fill: "forwards" });
+            });
+
+            hoverTargets.forEach(target => {
+                target.addEventListener("mouseenter", () => {
+                    cursorOutline.style.width = "60px";
+                    cursorOutline.style.height = "60px";
+                    cursorOutline.style.borderColor = "rgba(240, 147, 251, 0.8)";
+                    cursorDot.style.transform = "translate(-50%, -50%) scale(1.5)";
+                });
+                target.addEventListener("mouseleave", () => {
+                    cursorOutline.style.width = "40px";
+                    cursorOutline.style.height = "40px";
+                    cursorOutline.style.borderColor = "rgba(0, 242, 254, 0.5)";
+                    cursorDot.style.transform = "translate(-50%, -50%) scale(1)";
+                });
+            });
+
+            // 2. 3D Tilt Effect on Profile Picture
+            const profileCard = document.getElementById('tilt-profile');
+            const container = document.querySelector('.hero-image-container');
+
+            if(container && profileCard) {
+                container.addEventListener('mousemove', (e) => {
+                    const rect = profileCard.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top; 
+                    const centerX = rect.width / 2;
+                    const centerY = rect.height / 2;
+                    const rotateX = ((y - centerY) / centerY) * -15;
+                    const rotateY = ((x - centerX) / centerX) * 15;
+                    profileCard.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+                });
+
+                container.addEventListener('mouseleave', () => {
+                    profileCard.style.transform = `rotateX(0deg) rotateY(0deg)`;
+                });
+            }
+        }
+
+        // 3. Sticky Glass Header
+        window.addEventListener('scroll', () => {
+            const header = document.getElementById('header');
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // 4. Robust Scroll Reveal (Intersection Observer)
+        document.addEventListener("DOMContentLoaded", function() {
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.15
+            };
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                        observer.unobserve(entry.target); // Stop observing once it's visible
+                    }
+                });
+            }, observerOptions);
+
+            document.querySelectorAll('.reveal').forEach((element) => {
+                observer.observe(element);
+            });
+        });
+
+        // 5. Lightbox Modal Logic for Certificates
+        const modal = document.getElementById("imageModal");
+        const modalImg = document.getElementById("expandedImg");
+        const closeBtn = document.querySelector(".close-modal");
+        const certWrappers = document.querySelectorAll(".cert-image-wrapper");
+
+        certWrappers.forEach(wrapper => {
+            wrapper.addEventListener("click", function() {
+                const imgInside = this.querySelector("img");
+                if(imgInside && imgInside.style.display !== 'none') {
+                    modal.classList.add("show");
+                    modalImg.src = imgInside.src;
+                }
+            });
+        });
+
+        closeBtn.addEventListener("click", function() {
+            modal.classList.remove("show");
+        });
+
+        modal.addEventListener("click", function(e) {
+            if (e.target === modal) {
+                modal.classList.remove("show");
+            }
+        });
+
+    </script>
+</body>
+</html>
