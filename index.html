@@ -1,1 +1,228 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Muhammad Nouman Portfolio</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: #0f172a;
+      color: #e2e8f0;
+    }
+
+    /* NAVBAR */
+    nav {
+      position: sticky;
+      top: 0;
+      display: flex;
+      justify-content: space-between;
+      padding: 15px 40px;
+      background: rgba(15, 23, 42, 0.9);
+      backdrop-filter: blur(10px);
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      margin-left: 20px;
+      transition: 0.3s;
+    }
+
+    nav a:hover {
+      color: #38bdf8;
+    }
+
+    /* HERO */
+    header {
+      text-align: center;
+      padding: 100px 20px;
+      background: linear-gradient(135deg, #2563eb, #9333ea);
+    }
+
+    header h1 {
+      font-size: 3rem;
+      margin: 0;
+    }
+
+    /* BUTTON */
+    .btn {
+      display: inline-block;
+      margin-top: 20px;
+      padding: 10px 20px;
+      background: white;
+      color: black;
+      border-radius: 6px;
+      text-decoration: none;
+      transition: 0.3s;
+    }
+
+    .btn:hover {
+      background: #38bdf8;
+    }
+
+    /* SECTIONS */
+    section {
+      max-width: 900px;
+      margin: auto;
+      padding: 60px 20px;
+    }
+
+    h2 {
+      color: #38bdf8;
+      margin-bottom: 10px;
+    }
+
+    /* CARDS */
+    .card {
+      background: #1e293b;
+      padding: 20px;
+      border-radius: 12px;
+      margin-top: 15px;
+      transition: 0.3s;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+    }
+
+    .card:hover {
+      transform: translateY(-8px);
+    }
+
+    /* SKILLS */
+    .skills span {
+      display: inline-block;
+      background: #1e293b;
+      padding: 10px 15px;
+      margin: 5px;
+      border-radius: 20px;
+      transition: 0.3s;
+    }
+
+    .skills span:hover {
+      background: #2563eb;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      background: #020617;
+    }
+  </style>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<nav>
+  <h3>Nouman</h3>
+  <div>
+    <a href="#">Home</a>
+    <a href="#skills">Skills</a>
+    <a href="#contact">Contact</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header>
+  <h1>MUHAMMAD NOUMAN</h1>
+  <p>Project Management Student | Future Entrepreneur</p>
+  <a href="cv.pdf" class="btn" download>Download CV</a>
+</header>
+
+<section>
+  <h2>Profile</h2>
+  <p>
+    Dedicated Project Management student with strong academic foundation and practical exposure through internships and certifications. Passionate about innovation, startups, and global opportunities.
+  </p>
+</section>
+
+<section>
+  <h2>Career Goal</h2>
+  <p>
+    To pursue opportunities that enhance my knowledge and skills in project management and operations while contributing to innovative projects and gaining global exposure.
+  </p>
+</section>
+
+<section>
+  <h2>Work Experience</h2>
+  <div class="card">
+    <h3>Project Manager – Excelerate Internship</h3>
+    <p>July 2025 – August 2025</p>
+    <ul>
+      <li>XLab Global Experience Summit work</li>
+      <li>Managed timelines and coordination</li>
+      <li>Budgeting and planning</li>
+      <li>Team collaboration</li>
+    </ul>
+  </div>
+</section>
+
+<section>
+  <h2>Education</h2>
+  <div class="card">
+    <h3>BS Project Management</h3>
+    <p>2022 – 2026 | CGPA: 3.17</p>
+  </div>
+</section>
+
+<section id="skills">
+  <h2>Skills</h2>
+  <div class="skills">
+    <span>Project Management</span>
+    <span>Strategic Planning</span>
+    <span>MS Project</span>
+    <span>Data Analysis</span>
+    <span>Risk Management</span>
+    <span>Creative Thinking</span>
+  </div>
+</section>
+
+<section>
+  <h2>Certifications</h2>
+  <div class="card">
+    <ul>
+      <li>Foundations of Project Management – Coursera</li>
+      <li>Project Initiation – Coursera</li>
+      <li>Project Planning – Coursera</li>
+      <li>Project Execution – Coursera</li>
+      <li>Agile Project Management – Coursera</li>
+      <li>Capstone Project – Coursera</li>
+      <li>Project Management Foundations – LinkedIn Learning</li>
+      <li>Time Management Fundamentals</li>
+      <li>Excel Essential Training</li>
+      <li>Communication Skills</li>
+      <li>Leadership Foundations</li>
+    </ul>
+  </div>
+</section>
+
+<section>
+  <h2>Languages</h2>
+  <p>English | Urdu</p>
+</section>
+
+<section id="contact">
+  <h2>Contact</h2>
+  <p>Email: numanjan5257@gmail.com</p>
+  <p>Phone: +92-3269682746</p>
+  <p>Location: Punjab, Pakistan</p>
+</section>
+
+<footer>
+  <p>© 2026 Muhammad Nouman</p>
+</footer>
+
+<!-- SIMPLE ANIMATION -->
+<script>
+document.querySelectorAll('.card').forEach(card => {
+  card.style.opacity = 0;
+  setTimeout(() => {
+    card.style.transition = "0.6s";
+    card.style.opacity = 1;
+  }, 300);
+});
+</script>
+
+</body>
+</html>
