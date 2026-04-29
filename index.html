@@ -348,6 +348,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            cursor: pointer;
         }
         
         /* New Hover Overlay for Images */
@@ -419,24 +420,9 @@
             margin-bottom: 1rem;
         }
         
-        .cert-link {
-            margin-top: auto;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            color: var(--primary);
-            text-decoration: none;
-            font-size: 0.9rem;
-            font-weight: 600;
-            transition: color 0.3s;
-        }
-        .cert-link:hover {
-            color: var(--text-main);
-        }
-
-        /* --- NEW MODAL (LIGHTBOX) STYLES --- */
+        /* MODAL (LIGHTBOX) STYLES */
         .modal {
-            display: none; /* Hidden by default */
+            display: none; 
             align-items: center;
             justify-content: center;
             position: fixed;
@@ -480,13 +466,11 @@
             font-weight: bold;
             transition: 0.3s;
             z-index: 10001;
+            cursor: pointer;
         }
 
-        .close-modal:hover,
-        .close-modal:focus {
+        .close-modal:hover {
             color: var(--primary);
-            text-decoration: none;
-            cursor: pointer;
             transform: scale(1.2);
         }
 
@@ -528,7 +512,7 @@
             .profile-wrapper { width: 250px; height: 250px; }
             .cert-grid { grid-template-columns: 1fr; }
             .timeline-content h3 { font-size: 1.2rem; }
-            .close-modal { top: 15px; right: 20px; font-size: 30px; } /* Adjust close button for mobile */
+            .close-modal { top: 15px; right: 20px; font-size: 30px; }
         }
     </style>
 </head>
@@ -621,8 +605,14 @@
                 <div class="skill-bubble hover-target">Risk Management</div>
                 <div class="skill-bubble hover-target">Product Management</div>
                 <div class="skill-bubble hover-target">Change Management</div>
-                <div class="skill-bubble hover-target" style="border-color: var(--accent1);">English</div>
-                <div class="skill-bubble hover-target" style="border-color: var(--accent1);">Urdu</div>
+            </div>
+        </section>
+
+        <section style="margin-top: 5rem;" id="languages">
+            <h2 class="section-title reveal">Languages</h2>
+            <div class="skills-wrapper reveal delay-1">
+                <div class="skill-bubble hover-target" style="border-color: var(--accent1); background: rgba(240, 147, 251, 0.05);">English</div>
+                <div class="skill-bubble hover-target" style="border-color: var(--accent1); background: rgba(240, 147, 251, 0.05);">Urdu</div>
             </div>
         </section>
 
@@ -768,102 +758,4 @@
                 const posY = e.clientY;
                 cursorDot.style.left = `${posX}px`;
                 cursorDot.style.top = `${posY}px`;
-                cursorOutline.animate({ left: `${posX}px`, top: `${posY}px` }, { duration: 500, fill: "forwards" });
-            });
-
-            hoverTargets.forEach(target => {
-                target.addEventListener("mouseenter", () => {
-                    cursorOutline.style.width = "60px";
-                    cursorOutline.style.height = "60px";
-                    cursorOutline.style.borderColor = "rgba(240, 147, 251, 0.8)";
-                    cursorDot.style.transform = "translate(-50%, -50%) scale(1.5)";
-                });
-                target.addEventListener("mouseleave", () => {
-                    cursorOutline.style.width = "40px";
-                    cursorOutline.style.height = "40px";
-                    cursorOutline.style.borderColor = "rgba(0, 242, 254, 0.5)";
-                    cursorDot.style.transform = "translate(-50%, -50%) scale(1)";
-                });
-            });
-
-            // 2. 3D Tilt Effect on Profile Picture (Desktop Only)
-            const profileCard = document.getElementById('tilt-profile');
-            const container = document.querySelector('.hero-image-container');
-
-            container.addEventListener('mousemove', (e) => {
-                const rect = profileCard.getBoundingClientRect();
-                const x = e.clientX - rect.left;
-                const y = e.clientY - rect.top; 
-                const centerX = rect.width / 2;
-                const centerY = rect.height / 2;
-                const rotateX = ((y - centerY) / centerY) * -15;
-                const rotateY = ((x - centerX) / centerX) * 15;
-                profileCard.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
-            });
-
-            container.addEventListener('mouseleave', () => {
-                profileCard.style.transform = `rotateX(0deg) rotateY(0deg)`;
-            });
-        }
-
-        // 3. Sticky Glass Header
-        window.addEventListener('scroll', () => {
-            const header = document.getElementById('header');
-            if (window.scrollY > 50) {
-                header.classList.add('scrolled');
-            } else {
-                header.classList.remove('scrolled');
-            }
-        });
-
-        // 4. Smooth Scroll Reveal Animations
-        function reveal() {
-            var reveals = document.querySelectorAll(".reveal");
-            for (var i = 0; i < reveals.length; i++) {
-                var windowHeight = window.innerHeight;
-                var elementTop = reveals[i].getBoundingClientRect().top;
-                var elementVisible = 100;
-                if (elementTop < windowHeight - elementVisible) {
-                    reveals[i].classList.add("active");
-                }
-            }
-        }
-        window.addEventListener("scroll", reveal);
-        reveal(); // Trigger immediately on load
-
-        // 5. Lightbox Modal Logic for Certificates
-        const modal = document.getElementById("imageModal");
-        const modalImg = document.getElementById("expandedImg");
-        const closeBtn = document.querySelector(".close-modal");
-        
-        // Select all image wrappers
-        const certWrappers = document.querySelectorAll(".cert-image-wrapper");
-
-        certWrappers.forEach(wrapper => {
-            wrapper.addEventListener("click", function() {
-                // Find the actual image inside the clicked wrapper
-                const imgInside = this.querySelector("img");
-                
-                // Only open modal if the image source actually loaded (is not hidden)
-                if(imgInside && imgInside.style.display !== 'none') {
-                    modal.classList.add("show");
-                    modalImg.src = imgInside.src;
-                }
-            });
-        });
-
-        // Close when clicking the X
-        closeBtn.addEventListener("click", function() {
-            modal.classList.remove("show");
-        });
-
-        // Close when clicking anywhere on the dark background
-        modal.addEventListener("click", function(e) {
-            if (e.target === modal) {
-                modal.classList.remove("show");
-            }
-        });
-
-    </script>
-</body>
-</html>
+                cursorOutline.animate({ left: `${posX}px`, top: `${posY}px
