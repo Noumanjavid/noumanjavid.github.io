@@ -62,10 +62,6 @@
             letter-spacing: -0.5px;
         }
 
-        .logo span {
-            color: var(--accent-blue);
-        }
-
         .nav-links {
             display: flex;
             gap: 2.5rem;
@@ -149,29 +145,28 @@
             opacity: 0.5;
         }
 
-        /* Transparent Image Container styling */
+        /* UPDATED IMAGE CONTAINER TO CROP WHITE BACKGROUND PERFECTLY */
         .hero-img-container {
             width: 280px;
             height: 280px;
             border-radius: 50%;
-            background: radial-gradient(circle at center, #1e3a8a 0%, #05080f 65%);
+            background-color: #ffffff; /* White background to match image */
             display: flex;
-            align-items: flex-end;
+            align-items: center;
             justify-content: center;
             flex-shrink: 0;
-            border: 1px solid rgba(59, 130, 246, 0.2);
-            box-shadow: 0 0 40px rgba(59, 130, 246, 0.15);
+            border: 3px solid var(--accent-blue); /* Solid blue ring */
+            box-shadow: 0 0 40px rgba(59, 130, 246, 0.2);
             position: relative;
-            overflow: hidden;
+            overflow: hidden; /* This acts as a cookie cutter to make the image perfectly round! */
         }
 
         .hero-img {
-            width: 95%;
-            height: auto;
-            object-fit: contain;
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Ensures the image fills the perfect circle */
             position: relative;
             z-index: 2;
-            filter: drop-shadow(0 -10px 15px rgba(0,0,0,0.3));
         }
 
         .hero-content h1 {
@@ -534,7 +529,7 @@
 
 <div class="container">
     <nav>
-        <div class="logo">Nouman<span>.</span></div>
+        <div class="logo">Nouman</div>
         <ul class="nav-links">
             <li><a href="#home" class="active">Home</a></li>
             <li><a href="#about">About</a></li>
@@ -548,7 +543,7 @@
 
     <header class="hero" id="home">
         <div class="hero-img-container">
-            <img src="nouman.png" alt="Muhammad Nouman" class="hero-img">
+            <img src="nouman.jpg" alt="Muhammad Nouman" class="hero-img">
         </div>
         <div class="hero-content">
             <h1>Muhammad<br><span>Nouman</span></h1>
