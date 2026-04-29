@@ -23,7 +23,7 @@
             padding: 0;
             box-sizing: border-box;
             font-family: 'Poppins', sans-serif;
-            cursor: none; /* Hide default cursor for custom one */
+            cursor: none; /* Hide default cursor for custom one on desktop */
         }
 
         html {
@@ -31,7 +31,6 @@
             overflow-x: hidden;
         }
 
-        /* Animated Flowing Background */
         body {
             background-color: #050505;
             color: var(--text-main);
@@ -40,6 +39,7 @@
             position: relative;
         }
 
+        /* Animated Background */
         .bg-animation {
             position: fixed;
             top: -50%; left: -50%; width: 200%; height: 200%;
@@ -57,7 +57,7 @@
             100% { transform: rotate(360deg) scale(1); }
         }
 
-        /* Custom Interactive Cursor */
+        /* Custom Interactive Cursor (Desktop Only) */
         .cursor-dot {
             width: 8px; height: 8px;
             background: var(--primary);
@@ -80,10 +80,16 @@
             transition-timing-function: ease-out;
         }
 
+        /* Disable custom cursor on touch devices (Mobile/Tablet) */
+        @media (hover: none) and (pointer: coarse) {
+            .cursor-dot, .cursor-outline { display: none !important; }
+            * { cursor: auto !important; }
+        }
+
         .container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 0 2rem;
+            padding: 0 1.5rem;
             position: relative;
         }
 
@@ -96,7 +102,7 @@
             transition: all 0.4s ease;
         }
         header.scrolled {
-            background: rgba(10, 10, 15, 0.7);
+            background: rgba(10, 10, 15, 0.85);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
             border-bottom: 1px solid var(--glass-border);
@@ -150,7 +156,7 @@
 
         .hero-text { flex: 1; }
         .hero-text h2 {
-            font-size: 1.5rem;
+            font-size: 1.2rem;
             color: var(--primary);
             font-weight: 500;
             margin-bottom: 0.5rem;
@@ -200,34 +206,28 @@
             flex: 1;
             display: flex;
             justify-content: center;
-            perspective: 1000px; /* Enables 3D tilt */
+            perspective: 1000px;
         }
         .profile-wrapper {
             width: 380px; height: 380px;
             border-radius: 50%;
-            padding: 8px; /* Thickness of animated ring */
+            padding: 8px;
             background: linear-gradient(45deg, var(--primary), var(--secondary), var(--accent1), var(--accent2));
             background-size: 400% 400%;
             animation: gradientRing 8s ease infinite;
             box-shadow: 0 0 50px rgba(79, 172, 254, 0.3);
             transform-style: preserve-3d;
-            transition: transform 0.1s ease; /* Smooth follow for JS */
+            transition: transform 0.1s ease;
         }
         .profile-img {
             width: 100%; height: 100%;
             border-radius: 50%;
-            border: 6px solid #ffffff; /* Gives a clean frame to your white JPG */
+            border: 6px solid #ffffff;
             object-fit: cover;
-            transform: translateZ(30px); /* Makes image pop out during tilt */
+            transform: translateZ(30px);
         }
 
-        @keyframes gradientRing {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-
-        /* Glass Panels for Content */
+        /* Glass Panels */
         .section-title {
             font-size: 2.5rem;
             font-weight: 700;
@@ -263,7 +263,7 @@
             border-color: rgba(0, 242, 254, 0.3);
         }
 
-        /* Fluid Timeline */
+        /* Timeline */
         .timeline {
             position: relative;
             padding-left: 2rem;
@@ -291,7 +291,7 @@
             content: '✦'; position: absolute; left: 0; color: var(--accent1); font-size: 0.8rem; top: 4px;
         }
 
-        /* Interactive Skill Bubbles */
+        /* Skills */
         .skills-wrapper {
             display: flex;
             flex-wrap: wrap;
@@ -316,41 +316,101 @@
             border-color: transparent;
         }
 
-        /* Flowing Certifications Grid */
+        /* Image-Ready Certifications Grid */
         .cert-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 1.5rem;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
         }
         .cert-card {
             background: rgba(255, 255, 255, 0.02);
             border: 1px solid var(--glass-border);
-            padding: 1.5rem;
             border-radius: 16px;
+            overflow: hidden;
             display: flex;
-            align-items: flex-start;
-            gap: 1rem;
-            transition: all 0.3s ease;
+            flex-direction: column;
+            transition: all 0.4s ease;
         }
         .cert-card:hover {
-            background: rgba(255, 255, 255, 0.08);
-            transform: translateX(10px);
+            background: rgba(255, 255, 255, 0.05);
+            transform: translateY(-8px);
             border-color: var(--accent1);
+            box-shadow: 0 15px 30px rgba(240, 147, 251, 0.15);
         }
-        .cert-card i {
-            font-size: 2rem;
-            background: linear-gradient(to bottom, var(--primary), var(--secondary));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+        
+        .cert-image-wrapper {
+            width: 100%;
+            height: 200px;
+            overflow: hidden;
+            border-bottom: 1px solid var(--glass-border);
+            position: relative;
+            background-color: #111; 
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
-        .cert-info h4 { font-size: 1rem; font-weight: 600; line-height: 1.3; margin-bottom: 0.3rem; }
-        .cert-info p { font-size: 0.85rem; color: var(--accent1); text-transform: uppercase; letter-spacing: 1px; font-weight: 500; }
+        
+        .cert-image-wrapper i {
+            font-size: 3rem;
+            color: rgba(255,255,255,0.2);
+            position: absolute;
+            z-index: 1;
+        }
+
+        .cert-image-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            position: relative;
+            z-index: 2;
+            transition: transform 0.5s ease;
+        }
+
+        .cert-card:hover .cert-image-wrapper img {
+            transform: scale(1.08);
+        }
+
+        .cert-info { 
+            padding: 1.5rem; 
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+        }
+        .cert-info h4 { 
+            font-size: 1.1rem; 
+            font-weight: 600; 
+            line-height: 1.4; 
+            margin-bottom: 0.5rem; 
+        }
+        .cert-info p { 
+            font-size: 0.85rem; 
+            color: var(--accent1); 
+            text-transform: uppercase; 
+            letter-spacing: 1px; 
+            font-weight: 500; 
+            margin-bottom: 1rem;
+        }
+        
+        .cert-link {
+            margin-top: auto;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--primary);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 600;
+            transition: color 0.3s;
+        }
+        .cert-link:hover {
+            color: var(--text-main);
+        }
 
         /* Scroll Animations */
         .reveal {
             opacity: 0;
-            transform: translateY(50px);
-            transition: all 1s cubic-bezier(0.16, 1, 0.3, 1);
+            transform: translateY(40px);
+            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
         }
         .reveal.active {
             opacity: 1;
@@ -358,7 +418,6 @@
         }
         .delay-1 { transition-delay: 0.1s; }
         .delay-2 { transition-delay: 0.2s; }
-        .delay-3 { transition-delay: 0.3s; }
 
         footer {
             text-align: center;
@@ -368,11 +427,23 @@
             margin-top: 4rem;
         }
 
+        /* MOBILE RESPONSIVENESS FIXES */
         @media (max-width: 992px) {
-            .hero { flex-direction: column; text-align: center; padding-top: 120px; }
+            .hero { flex-direction: column-reverse; text-align: center; padding-top: 120px; gap: 2.5rem; }
+            .hero-text p { max-width: 100%; margin: 0 auto 2rem auto; }
             .contact-pills { justify-content: center; }
             .nav-links { display: none; }
             .profile-wrapper { width: 300px; height: 300px; margin: 0 auto; }
+            .grid-2-col { grid-template-columns: 1fr !important; }
+        }
+
+        @media (max-width: 768px) {
+            .hero-text h1 { font-size: 3rem; }
+            .section-title { font-size: 2rem; }
+            .glass-panel { padding: 1.5rem; }
+            .profile-wrapper { width: 250px; height: 250px; }
+            .cert-grid { grid-template-columns: 1fr; }
+            .timeline-content h3 { font-size: 1.2rem; }
         }
     </style>
 </head>
@@ -404,7 +475,7 @@
                 <h1 class="reveal delay-1">I am Muhammad <br>Nouman.</h1>
                 <p class="reveal delay-2">A dedicated Project Management student blending academic foundation with hands-on operational leadership. I turn complex ideas into structured, high-impact reality.</p>
                 
-                <div class="contact-pills reveal delay-3">
+                <div class="contact-pills reveal delay-2">
                     <a href="mailto:numanjan5257@gmail.com" style="text-decoration: none; color: inherit;">
                         <div class="contact-pill hover-target"><i class="fas fa-envelope"></i> numanjan5257@gmail.com</div>
                     </a>
@@ -413,14 +484,14 @@
                 </div>
             </div>
             
-            <div class="hero-image-container reveal delay-2">
+            <div class="hero-image-container reveal">
                 <div class="profile-wrapper" id="tilt-profile">
                     <img src="nouman.jpg" alt="Muhammad Nouman" class="profile-img">
                 </div>
             </div>
         </section>
 
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-top: 2rem;">
+        <div class="grid-2-col" style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 2rem;">
             <div class="glass-panel reveal hover-target">
                 <h3 style="color: var(--primary); margin-bottom: 1rem; font-size: 1.3rem;"><i class="fas fa-bullseye"></i> Career Goal</h3>
                 <p style="color: var(--text-muted);">To pursue opportunities that enhance my knowledge and skills in project management and operations, while contributing to innovative projects and gaining global exposure in a dynamic environment.</p>
@@ -437,7 +508,7 @@
 
         <section style="margin-top: 5rem;" id="experience">
             <h2 class="section-title reveal">My Journey</h2>
-            <div class="glass-panel reveal delay-1">
+            <div class="glass-panel reveal">
                 <div class="timeline">
                     <div class="timeline-node"></div>
                     <div class="timeline-content">
@@ -473,42 +544,115 @@
         <section style="margin-top: 5rem;" id="certifications">
             <h2 class="section-title reveal">Certifications</h2>
             <div class="cert-grid">
+                
                 <div class="cert-card reveal hover-target">
-                    <i class="fas fa-shield-check"></i>
-                    <div class="cert-info"><h4>Aha! Product Management Certificate</h4><p>LinkedIn Learning</p></div>
+                    <div class="cert-image-wrapper">
+                        <i class="fas fa-image"></i>
+                        <img src="cert1.jpg" alt="Aha! Product Management Certificate" onerror="this.style.display='none'"> 
+                    </div>
+                    <div class="cert-info">
+                        <h4>Aha! Product Management Certificate</h4>
+                        <p>LinkedIn Learning</p>
+                        <a href="#" class="cert-link hover-target">View Credential <i class="fas fa-external-link-alt"></i></a>
+                    </div>
                 </div>
+
                 <div class="cert-card reveal delay-1 hover-target">
-                    <i class="fas fa-shield-check"></i>
-                    <div class="cert-info"><h4>Notion: Build a Project Management Dashboard</h4><p>LinkedIn Learning</p></div>
+                    <div class="cert-image-wrapper">
+                        <i class="fas fa-image"></i>
+                        <img src="cert2.jpg" alt="Notion Dashboard Certificate" onerror="this.style.display='none'">
+                    </div>
+                    <div class="cert-info">
+                        <h4>Notion: Build a Project Management Dashboard</h4>
+                        <p>LinkedIn Learning</p>
+                        <a href="#" class="cert-link hover-target">View Credential <i class="fas fa-external-link-alt"></i></a>
+                    </div>
                 </div>
+
                 <div class="cert-card reveal delay-2 hover-target">
-                    <i class="fas fa-shield-check"></i>
-                    <div class="cert-info"><h4>Project Management Foundations: Budgets</h4><p>LinkedIn Learning</p></div>
+                    <div class="cert-image-wrapper">
+                        <i class="fas fa-image"></i>
+                        <img src="cert3.jpg" alt="Budgets Certificate" onerror="this.style.display='none'">
+                    </div>
+                    <div class="cert-info">
+                        <h4>Project Management Foundations: Budgets</h4>
+                        <p>LinkedIn Learning</p>
+                        <a href="#" class="cert-link hover-target">View Credential <i class="fas fa-external-link-alt"></i></a>
+                    </div>
                 </div>
+
                 <div class="cert-card reveal hover-target">
-                    <i class="fas fa-shield-check"></i>
-                    <div class="cert-info"><h4>Project Management Foundations: Requirements</h4><p>LinkedIn Learning</p></div>
+                    <div class="cert-image-wrapper">
+                        <i class="fas fa-image"></i>
+                        <img src="cert4.jpg" alt="Requirements Certificate" onerror="this.style.display='none'">
+                    </div>
+                    <div class="cert-info">
+                        <h4>Project Management Foundations: Requirements</h4>
+                        <p>LinkedIn Learning</p>
+                        <a href="#" class="cert-link hover-target">View Credential <i class="fas fa-external-link-alt"></i></a>
+                    </div>
                 </div>
+
                 <div class="cert-card reveal delay-1 hover-target">
-                    <i class="fas fa-shield-check"></i>
-                    <div class="cert-info"><h4>Managing Project Stakeholders</h4><p>LinkedIn Learning</p></div>
+                    <div class="cert-image-wrapper">
+                        <i class="fas fa-image"></i>
+                        <img src="cert5.jpg" alt="Stakeholders Certificate" onerror="this.style.display='none'">
+                    </div>
+                    <div class="cert-info">
+                        <h4>Managing Project Stakeholders</h4>
+                        <p>LinkedIn Learning</p>
+                        <a href="#" class="cert-link hover-target">View Credential <i class="fas fa-external-link-alt"></i></a>
+                    </div>
                 </div>
+
                 <div class="cert-card reveal delay-2 hover-target">
-                    <i class="fas fa-shield-check"></i>
-                    <div class="cert-info"><h4>Foundations of Project Management</h4><p>Coursera</p></div>
+                    <div class="cert-image-wrapper">
+                        <i class="fas fa-image"></i>
+                        <img src="cert6.jpg" alt="Foundations Coursera Certificate" onerror="this.style.display='none'">
+                    </div>
+                    <div class="cert-info">
+                        <h4>Foundations of Project Management</h4>
+                        <p>Coursera</p>
+                        <a href="#" class="cert-link hover-target">View Credential <i class="fas fa-external-link-alt"></i></a>
+                    </div>
                 </div>
+
                 <div class="cert-card reveal hover-target">
-                    <i class="fas fa-shield-check"></i>
-                    <div class="cert-info"><h4>Project Initiation: Starting a Successful Project</h4><p>Coursera</p></div>
+                    <div class="cert-image-wrapper">
+                        <i class="fas fa-image"></i>
+                        <img src="cert7.jpg" alt="Project Initiation Certificate" onerror="this.style.display='none'">
+                    </div>
+                    <div class="cert-info">
+                        <h4>Project Initiation: Starting a Successful Project</h4>
+                        <p>Coursera</p>
+                        <a href="#" class="cert-link hover-target">View Credential <i class="fas fa-external-link-alt"></i></a>
+                    </div>
                 </div>
+
                 <div class="cert-card reveal delay-1 hover-target">
-                    <i class="fas fa-shield-check"></i>
-                    <div class="cert-info"><h4>Project Planning: Putting It All Together</h4><p>Coursera</p></div>
+                    <div class="cert-image-wrapper">
+                        <i class="fas fa-image"></i>
+                        <img src="cert8.jpg" alt="Project Planning Certificate" onerror="this.style.display='none'">
+                    </div>
+                    <div class="cert-info">
+                        <h4>Project Planning: Putting It All Together</h4>
+                        <p>Coursera</p>
+                        <a href="#" class="cert-link hover-target">View Credential <i class="fas fa-external-link-alt"></i></a>
+                    </div>
                 </div>
+
                 <div class="cert-card reveal delay-2 hover-target">
-                    <i class="fas fa-shield-check"></i>
-                    <div class="cert-info"><h4>Capstone: Applying Project Mgt in the Real World</h4><p>Coursera</p></div>
+                    <div class="cert-image-wrapper">
+                        <i class="fas fa-image"></i>
+                        <img src="cert9.jpg" alt="Capstone Certificate" onerror="this.style.display='none'">
+                    </div>
+                    <div class="cert-info">
+                        <h4>Capstone: Applying Project Mgt in the Real World</h4>
+                        <p>Coursera</p>
+                        <a href="#" class="cert-link hover-target">View Credential <i class="fas fa-external-link-alt"></i></a>
+                    </div>
                 </div>
+
             </div>
         </section>
 
@@ -518,65 +662,57 @@
     </div>
 
     <script>
-        // 1. Custom Cursor Logic
-        const cursorDot = document.getElementById("cursor-dot");
-        const cursorOutline = document.getElementById("cursor-outline");
-        const hoverTargets = document.querySelectorAll('.hover-target, a, .skill-bubble');
+        // Check if device is touch screen
+        const isTouchDevice = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0) || (navigator.msMaxTouchPoints > 0);
 
-        window.addEventListener("mousemove", function (e) {
-            const posX = e.clientX;
-            const posY = e.clientY;
+        // 1. Custom Cursor Logic (Only run if not on touch device)
+        if (!isTouchDevice) {
+            const cursorDot = document.getElementById("cursor-dot");
+            const cursorOutline = document.getElementById("cursor-outline");
+            const hoverTargets = document.querySelectorAll('.hover-target, a, .skill-bubble');
 
-            // Dot follows exactly
-            cursorDot.style.left = `${posX}px`;
-            cursorDot.style.top = `${posY}px`;
-
-            // Outline follows with slight delay for flow
-            cursorOutline.animate({
-                left: `${posX}px`,
-                top: `${posY}px`
-            }, { duration: 500, fill: "forwards" });
-        });
-
-        // Cursor expand on hover
-        hoverTargets.forEach(target => {
-            target.addEventListener("mouseenter", () => {
-                cursorOutline.style.width = "60px";
-                cursorOutline.style.height = "60px";
-                cursorOutline.style.borderColor = "rgba(240, 147, 251, 0.8)"; // Accent color on hover
-                cursorDot.style.transform = "translate(-50%, -50%) scale(1.5)";
+            window.addEventListener("mousemove", function (e) {
+                const posX = e.clientX;
+                const posY = e.clientY;
+                cursorDot.style.left = `${posX}px`;
+                cursorDot.style.top = `${posY}px`;
+                cursorOutline.animate({ left: `${posX}px`, top: `${posY}px` }, { duration: 500, fill: "forwards" });
             });
-            target.addEventListener("mouseleave", () => {
-                cursorOutline.style.width = "40px";
-                cursorOutline.style.height = "40px";
-                cursorOutline.style.borderColor = "rgba(0, 242, 254, 0.5)";
-                cursorDot.style.transform = "translate(-50%, -50%) scale(1)";
+
+            hoverTargets.forEach(target => {
+                target.addEventListener("mouseenter", () => {
+                    cursorOutline.style.width = "60px";
+                    cursorOutline.style.height = "60px";
+                    cursorOutline.style.borderColor = "rgba(240, 147, 251, 0.8)";
+                    cursorDot.style.transform = "translate(-50%, -50%) scale(1.5)";
+                });
+                target.addEventListener("mouseleave", () => {
+                    cursorOutline.style.width = "40px";
+                    cursorOutline.style.height = "40px";
+                    cursorOutline.style.borderColor = "rgba(0, 242, 254, 0.5)";
+                    cursorDot.style.transform = "translate(-50%, -50%) scale(1)";
+                });
             });
-        });
 
-        // 2. 3D Tilt Effect on Profile Picture
-        const profileCard = document.getElementById('tilt-profile');
-        const container = document.querySelector('.hero-image-container');
+            // 2. 3D Tilt Effect on Profile Picture (Desktop Only)
+            const profileCard = document.getElementById('tilt-profile');
+            const container = document.querySelector('.hero-image-container');
 
-        container.addEventListener('mousemove', (e) => {
-            const rect = profileCard.getBoundingClientRect();
-            const x = e.clientX - rect.left; // x position within the element
-            const y = e.clientY - rect.top;  // y position within the element
-            
-            const centerX = rect.width / 2;
-            const centerY = rect.height / 2;
-            
-            // Calculate rotation (max 15 degrees)
-            const rotateX = ((y - centerY) / centerY) * -15;
-            const rotateY = ((x - centerX) / centerX) * 15;
+            container.addEventListener('mousemove', (e) => {
+                const rect = profileCard.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top; 
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+                const rotateX = ((y - centerY) / centerY) * -15;
+                const rotateY = ((x - centerX) / centerX) * 15;
+                profileCard.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+            });
 
-            profileCard.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
-        });
-
-        container.addEventListener('mouseleave', () => {
-            // Snap back to original on mouse leave
-            profileCard.style.transform = `rotateX(0deg) rotateY(0deg)`;
-        });
+            container.addEventListener('mouseleave', () => {
+                profileCard.style.transform = `rotateX(0deg) rotateY(0deg)`;
+            });
+        }
 
         // 3. Sticky Glass Header
         window.addEventListener('scroll', () => {
@@ -595,14 +731,13 @@
                 var windowHeight = window.innerHeight;
                 var elementTop = reveals[i].getBoundingClientRect().top;
                 var elementVisible = 100;
-
                 if (elementTop < windowHeight - elementVisible) {
                     reveals[i].classList.add("active");
                 }
             }
         }
         window.addEventListener("scroll", reveal);
-        reveal(); // Trigger on load
+        reveal();
     </script>
 </body>
 </html>
