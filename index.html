@@ -5,554 +5,604 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Muhammad Nouman | Portfolio</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-color: #030712; /* Deepest black/blue */
-            --card-bg: #111827;
-            --card-border: rgba(255, 255, 255, 0.05);
-            --text-primary: #F9FAFB;
-            --text-secondary: #9CA3AF;
-            --accent-blue: #3B82F6;
-            --accent-gradient: linear-gradient(135deg, #3B82F6, #8B5CF6);
-            --glow: 0 0 40px rgba(59, 130, 246, 0.1);
-            --transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            --primary: #00f2fe;
+            --secondary: #4facfe;
+            --accent1: #f093fb;
+            --accent2: #f5576c;
+            --text-main: #ffffff;
+            --text-muted: rgba(255, 255, 255, 0.7);
+            --glass-bg: rgba(25, 25, 35, 0.4);
+            --glass-border: rgba(255, 255, 255, 0.1);
         }
 
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-family: 'Poppins', sans-serif;
+            cursor: none; /* Hide default cursor for custom one */
         }
 
         html {
             scroll-behavior: smooth;
-        }
-
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
-        ::-webkit-scrollbar-track {
-            background: var(--bg-color);
-        }
-        ::-webkit-scrollbar-thumb {
-            background: #374151;
-            border-radius: 10px;
-        }
-
-        body {
-            background-color: var(--bg-color);
-            color: var(--text-primary);
-            line-height: 1.6;
-            background-image: 
-                radial-gradient(circle at 0% 0%, rgba(59, 130, 246, 0.05) 0%, transparent 50%),
-                radial-gradient(circle at 100% 100%, rgba(139, 92, 246, 0.05) 0%, transparent 50%);
             overflow-x: hidden;
+        }
+
+        /* Animated Flowing Background */
+        body {
+            background-color: #050505;
+            color: var(--text-main);
+            line-height: 1.7;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        .bg-animation {
+            position: fixed;
+            top: -50%; left: -50%; width: 200%; height: 200%;
+            background: radial-gradient(circle at 50% 50%, rgba(79, 172, 254, 0.15), transparent 60%),
+                        radial-gradient(circle at 80% 20%, rgba(240, 147, 251, 0.15), transparent 50%),
+                        radial-gradient(circle at 20% 80%, rgba(0, 242, 254, 0.15), transparent 50%);
+            z-index: -1;
+            animation: bgFlow 20s infinite linear alternate;
+            filter: blur(60px);
+        }
+
+        @keyframes bgFlow {
+            0% { transform: rotate(0deg) scale(1); }
+            50% { transform: rotate(180deg) scale(1.2); }
+            100% { transform: rotate(360deg) scale(1); }
+        }
+
+        /* Custom Interactive Cursor */
+        .cursor-dot {
+            width: 8px; height: 8px;
+            background: var(--primary);
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+            transform: translate(-50%, -50%);
+            transition: width 0.2s, height 0.2s, background 0.2s;
+        }
+        .cursor-outline {
+            width: 40px; height: 40px;
+            border: 2px solid rgba(0, 242, 254, 0.5);
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 9998;
+            transform: translate(-50%, -50%);
+            transition: width 0.2s, height 0.2s, border-color 0.2s;
+            transition-timing-function: ease-out;
         }
 
         .container {
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 2rem;
+            position: relative;
         }
 
-        /* Glass Nav */
+        /* Glassmorphism Header */
+        header {
+            position: fixed;
+            top: 0; left: 0; width: 100%;
+            padding: 1.5rem 0;
+            z-index: 1000;
+            transition: all 0.4s ease;
+        }
+        header.scrolled {
+            background: rgba(10, 10, 15, 0.7);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--glass-border);
+            padding: 1rem 0;
+        }
         nav {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 1.5rem 0;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            background: rgba(3, 7, 18, 0.6);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border-bottom: 1px solid transparent;
-            transition: var(--transition);
-        }
-        nav.scrolled {
-            border-bottom: 1px solid var(--card-border);
-            padding: 1rem 0;
         }
         .logo {
-            font-size: 1.5rem;
+            font-size: 1.8rem;
             font-weight: 800;
-            background: var(--accent-gradient);
+            background: linear-gradient(to right, var(--primary), var(--accent1));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            letter-spacing: 1px;
         }
         .nav-links {
             display: flex;
-            gap: 2rem;
+            gap: 2.5rem;
             list-style: none;
         }
         .nav-links a {
-            color: var(--text-secondary);
+            color: var(--text-muted);
             text-decoration: none;
-            font-size: 0.95rem;
             font-weight: 500;
-            transition: var(--transition);
-        }
-        .nav-links a:hover {
-            color: var(--text-primary);
-        }
-        .btn-download {
-            background: rgba(255, 255, 255, 0.05);
-            color: var(--text-primary);
-            border: 1px solid var(--card-border);
-            padding: 0.6rem 1.2rem;
-            border-radius: 12px;
-            font-weight: 600;
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            transition: var(--transition);
-        }
-        .btn-download:hover {
-            background: var(--text-primary);
-            color: var(--bg-color);
-            transform: translateY(-2px);
-        }
-
-        /* Bento Grid Layout */
-        .bento-grid {
-            display: grid;
-            grid-template-columns: repeat(12, 1fr);
-            gap: 1.5rem;
-            margin: 3rem 0 5rem 0;
-        }
-
-        .bento-card {
-            background: var(--card-bg);
-            border-radius: 32px;
-            padding: 2.5rem;
-            border: 1px solid var(--card-border);
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-            transition: var(--transition);
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .bento-card:hover {
-            border-color: rgba(59, 130, 246, 0.3);
-            transform: translateY(-5px);
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.2), 0 10px 10px -5px rgba(0, 0, 0, 0.04), var(--glow);
-        }
-
-        /* Column Span Helpers */
-        .span-8 { grid-column: span 8; }
-        .span-4 { grid-column: span 4; }
-        .span-12 { grid-column: span 12; }
-        .span-6 { grid-column: span 6; }
-
-        /* Specific Card Styles */
-        .hero-card {
-            display: flex;
-            align-items: center;
-            gap: 3rem;
-            background: linear-gradient(145deg, #111827, #0f1423);
-        }
-
-        /* FIXED IMAGE CONTAINER - The Squircle */
-        .profile-img-container {
-            width: 180px;
-            height: 180px;
-            flex-shrink: 0;
-            border-radius: 35px; /* Creates the app-icon look */
-            background-color: #ffffff; /* Fills gaps if image isn't perfectly square */
-            overflow: hidden;
-            border: 2px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3);
+            font-size: 0.95rem;
+            transition: color 0.3s ease;
             position: relative;
         }
+        .nav-links a::after {
+            content: ''; position: absolute;
+            bottom: -5px; left: 50%; width: 0; height: 2px;
+            background: var(--primary);
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+        .nav-links a:hover { color: var(--text-main); }
+        .nav-links a:hover::after { width: 100%; }
 
-        .profile-img-container img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover; /* Ensures it fills the rounded box perfectly */
-            object-position: top center;
-            transition: transform 0.5s ease;
+        /* Floating Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding-top: 80px;
+            gap: 4rem;
         }
 
-        .hero-card:hover .profile-img-container img {
-            transform: scale(1.05); /* Slight zoom on hover */
-        }
-
-        .hero-text h1 {
-            font-size: 3.2rem;
-            font-weight: 800;
-            line-height: 1.1;
-            margin-bottom: 0.5rem;
-            letter-spacing: -1px;
-        }
+        .hero-text { flex: 1; }
         .hero-text h2 {
-            font-size: 1.2rem;
-            color: var(--accent-blue);
-            font-weight: 600;
-            margin-bottom: 1rem;
+            font-size: 1.5rem;
+            color: var(--primary);
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+        .hero-text h1 {
+            font-size: 4.5rem;
+            line-height: 1.1;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
         }
         .hero-text p {
-            color: var(--text-secondary);
-            font-size: 1rem;
-            max-width: 500px;
-        }
-
-        /* Section Headers */
-        .section-header {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            font-size: 1.2rem;
-            font-weight: 700;
-            margin-bottom: 1.5rem;
-            color: var(--text-primary);
-        }
-        .section-header i {
-            color: var(--accent-blue);
-            background: rgba(59, 130, 246, 0.1);
-            padding: 0.5rem;
-            border-radius: 10px;
-            font-size: 1rem;
-        }
-
-        /* Contact & Education (Small Cards) */
-        .info-list {
-            display: flex;
-            flex-direction: column;
-            gap: 1.2rem;
-        }
-        .info-item {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            color: var(--text-secondary);
-            font-size: 0.95rem;
-        }
-        .info-item i {
-            color: var(--text-primary);
             font-size: 1.1rem;
-            width: 20px;
-            text-align: center;
-        }
-        .highlight-text {
-            color: var(--text-primary);
-            font-weight: 600;
-            font-size: 1.1rem;
-            display: block;
-            margin-bottom: 0.2rem;
+            color: var(--text-muted);
+            margin-bottom: 2.5rem;
+            max-width: 90%;
         }
 
-        /* Timeline (Experience) */
-        .timeline {
-            position: relative;
-            padding-left: 2rem;
-            border-left: 2px solid rgba(255, 255, 255, 0.05);
-        }
-        .timeline::before {
-            content: '';
-            position: absolute;
-            left: -7px;
-            top: 0;
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            background: var(--accent-blue);
-            box-shadow: 0 0 10px var(--accent-blue);
-        }
-        .timeline-date {
-            color: var(--accent-blue);
-            font-size: 0.85rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 0.5rem;
-            display: inline-block;
-        }
-        .timeline-title {
-            font-size: 1.25rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
-        }
-        .timeline-list {
-            list-style: none;
-            color: var(--text-secondary);
-        }
-        .timeline-list li {
-            margin-bottom: 0.8rem;
-            position: relative;
-            padding-left: 1.5rem;
-            line-height: 1.5;
-        }
-        .timeline-list li::before {
-            content: '→';
-            position: absolute;
-            left: 0;
-            color: var(--accent-blue);
-            font-weight: bold;
-        }
-
-        /* Skills Pill Layout */
-        .skills-container {
+        .contact-pills {
             display: flex;
             flex-wrap: wrap;
             gap: 1rem;
         }
-        .skill-tag {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid var(--card-border);
+        .contact-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.8rem;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
             padding: 0.8rem 1.5rem;
-            border-radius: 20px;
-            font-size: 0.95rem;
-            font-weight: 500;
-            transition: var(--transition);
-            cursor: default;
+            border-radius: 40px;
+            font-size: 0.9rem;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
         }
-        .skill-tag:hover {
-            background: var(--accent-gradient);
-            border-color: transparent;
-            color: white;
-            transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(59, 130, 246, 0.2);
+        .contact-pill i { color: var(--primary); font-size: 1.2rem; }
+        .contact-pill:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.1);
+            border-color: var(--primary);
+            box-shadow: 0 10px 20px rgba(0, 242, 254, 0.2);
         }
 
-        /* Certifications Grid */
-        .cert-list {
+        /* 3D Interactive Profile Image */
+        .hero-image-container {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            perspective: 1000px; /* Enables 3D tilt */
+        }
+        .profile-wrapper {
+            width: 380px; height: 380px;
+            border-radius: 50%;
+            padding: 8px; /* Thickness of animated ring */
+            background: linear-gradient(45deg, var(--primary), var(--secondary), var(--accent1), var(--accent2));
+            background-size: 400% 400%;
+            animation: gradientRing 8s ease infinite;
+            box-shadow: 0 0 50px rgba(79, 172, 254, 0.3);
+            transform-style: preserve-3d;
+            transition: transform 0.1s ease; /* Smooth follow for JS */
+        }
+        .profile-img {
+            width: 100%; height: 100%;
+            border-radius: 50%;
+            border: 6px solid #ffffff; /* Gives a clean frame to your white JPG */
+            object-fit: cover;
+            transform: translateZ(30px); /* Makes image pop out during tilt */
+        }
+
+        @keyframes gradientRing {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Glass Panels for Content */
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+            display: inline-block;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px; left: 20%; width: 60%; height: 4px;
+            background: linear-gradient(to right, transparent, var(--primary), transparent);
+            border-radius: 2px;
+        }
+
+        .glass-panel {
+            background: var(--glass-bg);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            padding: 3rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+        }
+        .glass-panel:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 242, 254, 0.1);
+            border-color: rgba(0, 242, 254, 0.3);
+        }
+
+        /* Fluid Timeline */
+        .timeline {
+            position: relative;
+            padding-left: 2rem;
+        }
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0; top: 0; width: 2px; height: 100%;
+            background: linear-gradient(to bottom, var(--primary), var(--accent1));
+            border-radius: 2px;
+        }
+        .timeline-node {
+            position: absolute;
+            left: -6px; top: 0;
+            width: 14px; height: 14px;
+            background: var(--primary);
+            border-radius: 50%;
+            box-shadow: 0 0 15px var(--primary);
+        }
+        .timeline-content h3 { font-size: 1.5rem; margin-bottom: 0.2rem; }
+        .timeline-content span { color: var(--primary); font-weight: 600; display: block; margin-bottom: 1rem; }
+        .timeline-content ul { list-style: none; color: var(--text-muted); }
+        .timeline-content li { margin-bottom: 0.8rem; position: relative; padding-left: 1.5rem; }
+        .timeline-content li::before {
+            content: '✦'; position: absolute; left: 0; color: var(--accent1); font-size: 0.8rem; top: 4px;
+        }
+
+        /* Interactive Skill Bubbles */
+        .skills-wrapper {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.2rem;
+            justify-content: center;
+        }
+        .skill-bubble {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 500;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            backdrop-filter: blur(5px);
+        }
+        .skill-bubble:hover {
+            background: var(--primary);
+            color: #000;
+            transform: scale(1.1) translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 242, 254, 0.4);
+            border-color: transparent;
+        }
+
+        /* Flowing Certifications Grid */
+        .cert-grid {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 1.5rem;
         }
-        .cert-item {
-            padding: 1.2rem;
+        .cert-card {
             background: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--glass-border);
+            padding: 1.5rem;
             border-radius: 16px;
-            border: 1px solid transparent;
-            transition: var(--transition);
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            transition: all 0.3s ease;
         }
-        .cert-item:hover {
-            border-color: rgba(255, 255, 255, 0.1);
-            background: rgba(255, 255, 255, 0.04);
+        .cert-card:hover {
+            background: rgba(255, 255, 255, 0.08);
+            transform: translateX(10px);
+            border-color: var(--accent1);
         }
-        .cert-item h4 {
-            font-size: 0.95rem;
-            margin-bottom: 0.4rem;
-            line-height: 1.3;
+        .cert-card i {
+            font-size: 2rem;
+            background: linear-gradient(to bottom, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
-        .cert-item p {
-            font-size: 0.8rem;
-            color: var(--text-secondary);
-            font-weight: 600;
-            letter-spacing: 0.5px;
-            text-transform: uppercase;
-        }
+        .cert-info h4 { font-size: 1rem; font-weight: 600; line-height: 1.3; margin-bottom: 0.3rem; }
+        .cert-info p { font-size: 0.85rem; color: var(--accent1); text-transform: uppercase; letter-spacing: 1px; font-weight: 500; }
 
-        /* Footer */
-        footer {
-            text-align: center;
-            padding: 2rem 0;
-            color: var(--text-secondary);
-            font-size: 0.9rem;
-            border-top: 1px solid var(--card-border);
-        }
-
-        /* Animations */
+        /* Scroll Animations */
         .reveal {
             opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+            transform: translateY(50px);
+            transition: all 1s cubic-bezier(0.16, 1, 0.3, 1);
         }
         .reveal.active {
             opacity: 1;
             transform: translateY(0);
         }
-        
-        /* Staggered loading */
         .delay-1 { transition-delay: 0.1s; }
         .delay-2 { transition-delay: 0.2s; }
         .delay-3 { transition-delay: 0.3s; }
 
-        @media (max-width: 1024px) {
-            .span-8, .span-4, .span-6 { grid-column: span 12; }
-            .hero-card { flex-direction: column; text-align: center; padding: 2rem; }
-            .cert-list { grid-template-columns: 1fr 1fr; }
-            .nav-links { display: none; }
+        footer {
+            text-align: center;
+            padding: 3rem 0;
+            color: var(--text-muted);
+            border-top: 1px solid var(--glass-border);
+            margin-top: 4rem;
         }
-        @media (max-width: 600px) {
-            .cert-list { grid-template-columns: 1fr; }
+
+        @media (max-width: 992px) {
+            .hero { flex-direction: column; text-align: center; padding-top: 120px; }
+            .contact-pills { justify-content: center; }
+            .nav-links { display: none; }
+            .profile-wrapper { width: 300px; height: 300px; margin: 0 auto; }
         }
     </style>
 </head>
 <body>
 
-<div class="container">
-    <nav id="navbar">
-        <div class="logo">Nouman.</div>
-        <ul class="nav-links">
-            <li><a href="#about">About</a></li>
-            <li><a href="#experience">Experience</a></li>
-            <li><a href="#skills">Skills</a></li>
-            <li><a href="#certifications">Certifications</a></li>
-        </ul>
-        <a href="#" class="btn-download"><i class="fas fa-file-pdf"></i> Resume</a>
-    </nav>
+    <div class="bg-animation"></div>
 
-    <div class="bento-grid">
-        
-        <div class="bento-card span-8 hero-card reveal" id="about">
-            <div class="profile-img-container">
-                <img src="nouman.jpg" alt="Muhammad Nouman">
-            </div>
-            <div class="hero-text">
-                <h1>Muhammad Nouman</h1>
-                <h2>Project Manager</h2>
-                <p>Dedicated Project Management student with a strong academic foundation and practical exposure through internships and certifications. Passionate about innovation, startups, and turning ideas into reality.</p>
-            </div>
-        </div>
+    <div class="cursor-dot" id="cursor-dot"></div>
+    <div class="cursor-outline" id="cursor-outline"></div>
 
-        <div class="bento-card span-4 reveal delay-1">
-            <div class="section-header"><i class="fas fa-paper-plane"></i> Contact</div>
-            <div class="info-list">
-                <div class="info-item">
-                    <i class="fas fa-envelope"></i>
-                    <span>numanjan5257@gmail.com</span>
-                </div>
-                <div class="info-item">
-                    <i class="fas fa-phone"></i>
-                    <span>+92 3269682746</span>
-                </div>
-                <div class="info-item">
-                    <i class="fas fa-map-marker-alt"></i>
-                    <span>Punjab, Pakistan</span>
-                </div>
-                <div class="info-item" style="margin-top: 1rem;">
-                    <i class="fas fa-globe"></i>
-                    <span>English, Urdu</span>
-                </div>
-            </div>
-        </div>
-
-        <div class="bento-card span-8 reveal" id="experience">
-            <div class="section-header"><i class="fas fa-briefcase"></i> Experience</div>
-            <div class="timeline">
-                <span class="timeline-date">July 2025 — August 2025</span>
-                <h3 class="timeline-title">Project Manager <span style="color: var(--text-secondary); font-weight: 400;">| Excelerate Internship</span></h3>
-                <ul class="timeline-list">
-                    <li>Assisted in planning and execution of a global experiential learning event (XLab: The Global Experience Summit).</li>
-                    <li>Coordinated with cross-functional team members to manage timelines and meet deliverables.</li>
-                    <li>Contributed heavily to project documentation, budgeting, and risk planning.</li>
-                    <li>Created comprehensive project plans including scope, budget, and risk management.</li>
+    <header id="header">
+        <div class="container">
+            <nav>
+                <div class="logo">Nouman</div>
+                <ul class="nav-links">
+                    <li><a href="#home" class="hover-target">Home</a></li>
+                    <li><a href="#experience" class="hover-target">Experience</a></li>
+                    <li><a href="#skills" class="hover-target">Skills</a></li>
+                    <li><a href="#certifications" class="hover-target">Certifications</a></li>
                 </ul>
-            </div>
+            </nav>
         </div>
+    </header>
 
-        <div class="bento-card span-4 reveal delay-1">
-            <div class="section-header"><i class="fas fa-graduation-cap"></i> Education</div>
-            <span class="highlight-text">BS Project Management</span>
-            <p style="color: var(--text-secondary); margin-bottom: 1rem;">2022 – 2026 (8th Semester)</p>
+    <div class="container">
+        <section class="hero" id="home">
+            <div class="hero-text">
+                <h2 class="reveal">Welcome to my universe</h2>
+                <h1 class="reveal delay-1">I am Muhammad <br>Nouman.</h1>
+                <p class="reveal delay-2">A dedicated Project Management student blending academic foundation with hands-on operational leadership. I turn complex ideas into structured, high-impact reality.</p>
+                
+                <div class="contact-pills reveal delay-3">
+                    <a href="mailto:numanjan5257@gmail.com" style="text-decoration: none; color: inherit;">
+                        <div class="contact-pill hover-target"><i class="fas fa-envelope"></i> numanjan5257@gmail.com</div>
+                    </a>
+                    <div class="contact-pill hover-target"><i class="fas fa-phone"></i> +92 3269682746</div>
+                    <div class="contact-pill hover-target"><i class="fas fa-map-marker-alt"></i> Punjab, Pakistan</div>
+                </div>
+            </div>
             
-            <div style="background: rgba(59, 130, 246, 0.1); padding: 1rem; border-radius: 12px; border: 1px solid rgba(59, 130, 246, 0.2); display: inline-block;">
-                <span style="color: var(--text-secondary); font-size: 0.85rem;">Current CGPA</span><br>
-                <span style="font-size: 1.5rem; font-weight: 800; color: var(--accent-blue);">3.17</span>
+            <div class="hero-image-container reveal delay-2">
+                <div class="profile-wrapper" id="tilt-profile">
+                    <img src="nouman.jpg" alt="Muhammad Nouman" class="profile-img">
+                </div>
             </div>
-        </div>
+        </section>
 
-        <div class="bento-card span-12 reveal" id="skills">
-            <div class="section-header"><i class="fas fa-code"></i> Core Competencies</div>
-            <div class="skills-container">
-                <div class="skill-tag">Strategic Planning</div>
-                <div class="skill-tag">MS Project</div>
-                <div class="skill-tag">Crisis Management</div>
-                <div class="skill-tag">Creative Thinking</div>
-                <div class="skill-tag">Data Analysis</div>
-                <div class="skill-tag">Risk Management</div>
-                <div class="skill-tag">Product Management</div>
-                <div class="skill-tag">Change Management</div>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-top: 2rem;">
+            <div class="glass-panel reveal hover-target">
+                <h3 style="color: var(--primary); margin-bottom: 1rem; font-size: 1.3rem;"><i class="fas fa-bullseye"></i> Career Goal</h3>
+                <p style="color: var(--text-muted);">To pursue opportunities that enhance my knowledge and skills in project management and operations, while contributing to innovative projects and gaining global exposure in a dynamic environment.</p>
             </div>
-        </div>
-
-        <div class="bento-card span-12 reveal" id="certifications">
-            <div class="section-header"><i class="fas fa-award"></i> Certifications</div>
-            <div class="cert-list">
-                <div class="cert-item">
-                    <h4>Aha! Product Management Certificate</h4>
-                    <p>LinkedIn Learning</p>
-                </div>
-                <div class="cert-item">
-                    <h4>Notion: Build a Project Management Dashboard</h4>
-                    <p>LinkedIn Learning</p>
-                </div>
-                <div class="cert-item">
-                    <h4>Project Management Foundations: Budgets</h4>
-                    <p>LinkedIn Learning</p>
-                </div>
-                <div class="cert-item">
-                    <h4>Project Management Foundations: Requirements</h4>
-                    <p>LinkedIn Learning</p>
-                </div>
-                <div class="cert-item">
-                    <h4>Managing Project Stakeholders</h4>
-                    <p>LinkedIn Learning</p>
-                </div>
-                <div class="cert-item">
-                    <h4>Foundations of Project Management</h4>
-                    <p>Coursera</p>
-                </div>
-                <div class="cert-item">
-                    <h4>Project Initiation: Starting a Successful Project</h4>
-                    <p>Coursera</p>
-                </div>
-                <div class="cert-item">
-                    <h4>Project Planning: Putting It All Together</h4>
-                    <p>Coursera</p>
-                </div>
-                <div class="cert-item">
-                    <h4>Capstone: Applying Project Mgt in the Real World</h4>
-                    <p>Coursera</p>
+            <div class="glass-panel reveal delay-1 hover-target">
+                <h3 style="color: var(--primary); margin-bottom: 1rem; font-size: 1.3rem;"><i class="fas fa-graduation-cap"></i> Education</h3>
+                <h4 style="font-size: 1.2rem; margin-bottom: 0.3rem;">BS Project Management</h4>
+                <p style="color: var(--text-muted); margin-bottom: 1rem;">2022 – 2026 (8th Semester)</p>
+                <div style="background: rgba(0,0,0,0.3); padding: 0.5rem 1rem; border-radius: 8px; display: inline-block; border: 1px solid var(--glass-border);">
+                    <span style="color: var(--accent1); font-weight: bold;">CGPA: 3.17</span>
                 </div>
             </div>
         </div>
 
+        <section style="margin-top: 5rem;" id="experience">
+            <h2 class="section-title reveal">My Journey</h2>
+            <div class="glass-panel reveal delay-1">
+                <div class="timeline">
+                    <div class="timeline-node"></div>
+                    <div class="timeline-content">
+                        <h3>Project Manager <span style="color: white; font-weight: 300;">| Excelerate Internship</span></h3>
+                        <span>July 2025 — August 2025</span>
+                        <ul>
+                            <li>Assisted in planning and execution of a global experiential learning event (XLab: The Global Experience Summit).</li>
+                            <li>Coordinated with cross-functional team members to manage timelines and meet deliverables.</li>
+                            <li>Contributed heavily to project documentation, budgeting, and risk planning.</li>
+                            <li>Created comprehensive project plans including scope, budget, and risk management.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section style="margin-top: 5rem;" id="skills">
+            <h2 class="section-title reveal">Core Competencies</h2>
+            <div class="skills-wrapper reveal delay-1">
+                <div class="skill-bubble hover-target">Strategic Planning</div>
+                <div class="skill-bubble hover-target">MS Project</div>
+                <div class="skill-bubble hover-target">Crisis Management</div>
+                <div class="skill-bubble hover-target">Creative Thinking</div>
+                <div class="skill-bubble hover-target">Data Analysis</div>
+                <div class="skill-bubble hover-target">Risk Management</div>
+                <div class="skill-bubble hover-target">Product Management</div>
+                <div class="skill-bubble hover-target">Change Management</div>
+                <div class="skill-bubble hover-target" style="border-color: var(--accent1);">English</div>
+                <div class="skill-bubble hover-target" style="border-color: var(--accent1);">Urdu</div>
+            </div>
+        </section>
+
+        <section style="margin-top: 5rem;" id="certifications">
+            <h2 class="section-title reveal">Certifications</h2>
+            <div class="cert-grid">
+                <div class="cert-card reveal hover-target">
+                    <i class="fas fa-shield-check"></i>
+                    <div class="cert-info"><h4>Aha! Product Management Certificate</h4><p>LinkedIn Learning</p></div>
+                </div>
+                <div class="cert-card reveal delay-1 hover-target">
+                    <i class="fas fa-shield-check"></i>
+                    <div class="cert-info"><h4>Notion: Build a Project Management Dashboard</h4><p>LinkedIn Learning</p></div>
+                </div>
+                <div class="cert-card reveal delay-2 hover-target">
+                    <i class="fas fa-shield-check"></i>
+                    <div class="cert-info"><h4>Project Management Foundations: Budgets</h4><p>LinkedIn Learning</p></div>
+                </div>
+                <div class="cert-card reveal hover-target">
+                    <i class="fas fa-shield-check"></i>
+                    <div class="cert-info"><h4>Project Management Foundations: Requirements</h4><p>LinkedIn Learning</p></div>
+                </div>
+                <div class="cert-card reveal delay-1 hover-target">
+                    <i class="fas fa-shield-check"></i>
+                    <div class="cert-info"><h4>Managing Project Stakeholders</h4><p>LinkedIn Learning</p></div>
+                </div>
+                <div class="cert-card reveal delay-2 hover-target">
+                    <i class="fas fa-shield-check"></i>
+                    <div class="cert-info"><h4>Foundations of Project Management</h4><p>Coursera</p></div>
+                </div>
+                <div class="cert-card reveal hover-target">
+                    <i class="fas fa-shield-check"></i>
+                    <div class="cert-info"><h4>Project Initiation: Starting a Successful Project</h4><p>Coursera</p></div>
+                </div>
+                <div class="cert-card reveal delay-1 hover-target">
+                    <i class="fas fa-shield-check"></i>
+                    <div class="cert-info"><h4>Project Planning: Putting It All Together</h4><p>Coursera</p></div>
+                </div>
+                <div class="cert-card reveal delay-2 hover-target">
+                    <i class="fas fa-shield-check"></i>
+                    <div class="cert-info"><h4>Capstone: Applying Project Mgt in the Real World</h4><p>Coursera</p></div>
+                </div>
+            </div>
+        </section>
+
+        <footer>
+            <p>© 2026 Muhammad Nouman. Built with flow and interaction.</p>
+        </footer>
     </div>
 
-    <footer>
-        <p>© 2026 Muhammad Nouman. Designed for impact.</p>
-    </footer>
+    <script>
+        // 1. Custom Cursor Logic
+        const cursorDot = document.getElementById("cursor-dot");
+        const cursorOutline = document.getElementById("cursor-outline");
+        const hoverTargets = document.querySelectorAll('.hover-target, a, .skill-bubble');
 
-</div>
+        window.addEventListener("mousemove", function (e) {
+            const posX = e.clientX;
+            const posY = e.clientY;
 
-<script>
-    // Sticky Nav effect
-    window.addEventListener('scroll', function() {
-        const navbar = document.getElementById('navbar');
-        if (window.scrollY > 20) {
-            navbar.classList.add('scrolled');
-        } else {
-            navbar.classList.remove('scrolled');
-        }
-    });
+            // Dot follows exactly
+            cursorDot.style.left = `${posX}px`;
+            cursorDot.style.top = `${posY}px`;
 
-    // Intersection Observer for scroll animations
-    const observerOptions = {
-        root: null,
-        rootMargin: '0px',
-        threshold: 0.1
-    };
+            // Outline follows with slight delay for flow
+            cursorOutline.animate({
+                left: `${posX}px`,
+                top: `${posY}px`
+            }, { duration: 500, fill: "forwards" });
+        });
 
-    const observer = new IntersectionObserver((entries, observer) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('active');
-                observer.unobserve(entry.target); // Only animate once
+        // Cursor expand on hover
+        hoverTargets.forEach(target => {
+            target.addEventListener("mouseenter", () => {
+                cursorOutline.style.width = "60px";
+                cursorOutline.style.height = "60px";
+                cursorOutline.style.borderColor = "rgba(240, 147, 251, 0.8)"; // Accent color on hover
+                cursorDot.style.transform = "translate(-50%, -50%) scale(1.5)";
+            });
+            target.addEventListener("mouseleave", () => {
+                cursorOutline.style.width = "40px";
+                cursorOutline.style.height = "40px";
+                cursorOutline.style.borderColor = "rgba(0, 242, 254, 0.5)";
+                cursorDot.style.transform = "translate(-50%, -50%) scale(1)";
+            });
+        });
+
+        // 2. 3D Tilt Effect on Profile Picture
+        const profileCard = document.getElementById('tilt-profile');
+        const container = document.querySelector('.hero-image-container');
+
+        container.addEventListener('mousemove', (e) => {
+            const rect = profileCard.getBoundingClientRect();
+            const x = e.clientX - rect.left; // x position within the element
+            const y = e.clientY - rect.top;  // y position within the element
+            
+            const centerX = rect.width / 2;
+            const centerY = rect.height / 2;
+            
+            // Calculate rotation (max 15 degrees)
+            const rotateX = ((y - centerY) / centerY) * -15;
+            const rotateY = ((x - centerX) / centerX) * 15;
+
+            profileCard.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+        });
+
+        container.addEventListener('mouseleave', () => {
+            // Snap back to original on mouse leave
+            profileCard.style.transform = `rotateX(0deg) rotateY(0deg)`;
+        });
+
+        // 3. Sticky Glass Header
+        window.addEventListener('scroll', () => {
+            const header = document.getElementById('header');
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
             }
         });
-    }, observerOptions);
 
-    document.querySelectorAll('.reveal').forEach((element) => {
-        observer.observe(element);
-    });
-</script>
+        // 4. Smooth Scroll Reveal Animations
+        function reveal() {
+            var reveals = document.querySelectorAll(".reveal");
+            for (var i = 0; i < reveals.length; i++) {
+                var windowHeight = window.innerHeight;
+                var elementTop = reveals[i].getBoundingClientRect().top;
+                var elementVisible = 100;
 
+                if (elementTop < windowHeight - elementVisible) {
+                    reveals[i].classList.add("active");
+                }
+            }
+        }
+        window.addEventListener("scroll", reveal);
+        reveal(); // Trigger on load
+    </script>
 </body>
 </html>
