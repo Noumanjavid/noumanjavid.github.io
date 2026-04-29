@@ -23,7 +23,7 @@
             padding: 0;
             box-sizing: border-box;
             font-family: 'Poppins', sans-serif;
-            cursor: none;
+            cursor: none; /* Hide default cursor for custom one on desktop */
         }
 
         html {
@@ -350,7 +350,35 @@
             justify-content: center;
         }
         
-        .cert-image-wrapper i {
+        /* New Hover Overlay for Images */
+        .cert-image-overlay {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: 3;
+        }
+        
+        .cert-image-overlay i {
+            color: #fff;
+            font-size: 2.5rem;
+            transform: scale(0.5);
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .cert-image-wrapper:hover .cert-image-overlay {
+            opacity: 1;
+        }
+        
+        .cert-image-wrapper:hover .cert-image-overlay i {
+            transform: scale(1);
+        }
+
+        .cert-image-wrapper .placeholder-icon {
             font-size: 3rem;
             color: rgba(255,255,255,0.2);
             position: absolute;
@@ -406,6 +434,62 @@
             color: var(--text-main);
         }
 
+        /* --- NEW MODAL (LIGHTBOX) STYLES --- */
+        .modal {
+            display: none; /* Hidden by default */
+            align-items: center;
+            justify-content: center;
+            position: fixed;
+            z-index: 10000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .modal.show {
+            display: flex;
+            opacity: 1;
+        }
+
+        .modal-content {
+            max-width: 90%;
+            max-height: 85vh;
+            border-radius: 12px;
+            box-shadow: 0 0 40px rgba(0, 242, 254, 0.2);
+            transform: scale(0.8);
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            object-fit: contain;
+        }
+
+        .modal.show .modal-content {
+            transform: scale(1);
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 30px;
+            right: 40px;
+            color: #fff;
+            font-size: 40px;
+            font-weight: bold;
+            transition: 0.3s;
+            z-index: 10001;
+        }
+
+        .close-modal:hover,
+        .close-modal:focus {
+            color: var(--primary);
+            text-decoration: none;
+            cursor: pointer;
+            transform: scale(1.2);
+        }
+
         /* Scroll Animations */
         .reveal {
             opacity: 0;
@@ -444,6 +528,7 @@
             .profile-wrapper { width: 250px; height: 250px; }
             .cert-grid { grid-template-columns: 1fr; }
             .timeline-content h3 { font-size: 1.2rem; }
+            .close-modal { top: 15px; right: 20px; font-size: 30px; } /* Adjust close button for mobile */
         }
     </style>
 </head>
@@ -546,110 +631,110 @@
             <div class="cert-grid">
                 
                 <div class="cert-card reveal hover-target">
-                    <div class="cert-image-wrapper">
-                        <i class="fas fa-image"></i>
+                    <div class="cert-image-wrapper hover-target">
+                        <i class="fas fa-image placeholder-icon"></i>
+                        <div class="cert-image-overlay"><i class="fas fa-search-plus"></i></div>
                         <img src="Cert1.jpg" alt="Aha! Product Management Certificate" onerror="this.style.display='none'"> 
                     </div>
                     <div class="cert-info">
                         <h4>Aha! Product Management Certificate</h4>
                         <p>LinkedIn Learning</p>
-                        <a href="#" class="cert-link hover-target">View Credential <i class="fas fa-external-link-alt"></i></a>
                     </div>
                 </div>
 
                 <div class="cert-card reveal delay-1 hover-target">
-                    <div class="cert-image-wrapper">
-                        <i class="fas fa-image"></i>
+                    <div class="cert-image-wrapper hover-target">
+                        <i class="fas fa-image placeholder-icon"></i>
+                        <div class="cert-image-overlay"><i class="fas fa-search-plus"></i></div>
                         <img src="Cert2.jpg" alt="Notion Dashboard Certificate" onerror="this.style.display='none'">
                     </div>
                     <div class="cert-info">
                         <h4>Notion: Build a Project Management Dashboard</h4>
                         <p>LinkedIn Learning</p>
-                        <a href="#" class="cert-link hover-target">View Credential <i class="fas fa-external-link-alt"></i></a>
                     </div>
                 </div>
 
                 <div class="cert-card reveal delay-2 hover-target">
-                    <div class="cert-image-wrapper">
-                        <i class="fas fa-image"></i>
+                    <div class="cert-image-wrapper hover-target">
+                        <i class="fas fa-image placeholder-icon"></i>
+                        <div class="cert-image-overlay"><i class="fas fa-search-plus"></i></div>
                         <img src="Cert3.jpg" alt="Budgets Certificate" onerror="this.style.display='none'">
                     </div>
                     <div class="cert-info">
                         <h4>Project Management Foundations: Budgets</h4>
                         <p>LinkedIn Learning</p>
-                        <a href="#" class="cert-link hover-target">View Credential <i class="fas fa-external-link-alt"></i></a>
                     </div>
                 </div>
 
                 <div class="cert-card reveal hover-target">
-                    <div class="cert-image-wrapper">
-                        <i class="fas fa-image"></i>
+                    <div class="cert-image-wrapper hover-target">
+                        <i class="fas fa-image placeholder-icon"></i>
+                        <div class="cert-image-overlay"><i class="fas fa-search-plus"></i></div>
                         <img src="Cert4.jpg" alt="Requirements Certificate" onerror="this.style.display='none'">
                     </div>
                     <div class="cert-info">
                         <h4>Project Management Foundations: Requirements</h4>
                         <p>LinkedIn Learning</p>
-                        <a href="#" class="cert-link hover-target">View Credential <i class="fas fa-external-link-alt"></i></a>
                     </div>
                 </div>
 
                 <div class="cert-card reveal delay-1 hover-target">
-                    <div class="cert-image-wrapper">
-                        <i class="fas fa-image"></i>
+                    <div class="cert-image-wrapper hover-target">
+                        <i class="fas fa-image placeholder-icon"></i>
+                        <div class="cert-image-overlay"><i class="fas fa-search-plus"></i></div>
                         <img src="Cert5.jpg" alt="Stakeholders Certificate" onerror="this.style.display='none'">
                     </div>
                     <div class="cert-info">
                         <h4>Managing Project Stakeholders</h4>
                         <p>LinkedIn Learning</p>
-                        <a href="#" class="cert-link hover-target">View Credential <i class="fas fa-external-link-alt"></i></a>
                     </div>
                 </div>
 
                 <div class="cert-card reveal delay-2 hover-target">
-                    <div class="cert-image-wrapper">
-                        <i class="fas fa-image"></i>
+                    <div class="cert-image-wrapper hover-target">
+                        <i class="fas fa-image placeholder-icon"></i>
+                        <div class="cert-image-overlay"><i class="fas fa-search-plus"></i></div>
                         <img src="Cert6.jpg" alt="Foundations Coursera Certificate" onerror="this.style.display='none'">
                     </div>
                     <div class="cert-info">
                         <h4>Foundations of Project Management</h4>
                         <p>Coursera</p>
-                        <a href="#" class="cert-link hover-target">View Credential <i class="fas fa-external-link-alt"></i></a>
                     </div>
                 </div>
 
                 <div class="cert-card reveal hover-target">
-                    <div class="cert-image-wrapper">
-                        <i class="fas fa-image"></i>
+                    <div class="cert-image-wrapper hover-target">
+                        <i class="fas fa-image placeholder-icon"></i>
+                        <div class="cert-image-overlay"><i class="fas fa-search-plus"></i></div>
                         <img src="Cert7.jpg" alt="Project Initiation Certificate" onerror="this.style.display='none'">
                     </div>
                     <div class="cert-info">
                         <h4>Project Initiation: Starting a Successful Project</h4>
                         <p>Coursera</p>
-                        <a href="#" class="cert-link hover-target">View Credential <i class="fas fa-external-link-alt"></i></a>
                     </div>
                 </div>
 
                 <div class="cert-card reveal delay-1 hover-target">
-                    <div class="cert-image-wrapper">
-                        <i class="fas fa-image"></i>
+                    <div class="cert-image-wrapper hover-target">
+                        <i class="fas fa-image placeholder-icon"></i>
+                        <div class="cert-image-overlay"><i class="fas fa-search-plus"></i></div>
                         <img src="Cert8.jpg" alt="Project Planning Certificate" onerror="this.style.display='none'">
                     </div>
                     <div class="cert-info">
                         <h4>Project Planning: Putting It All Together</h4>
                         <p>Coursera</p>
-                        <a href="#" class="cert-link hover-target">View Credential <i class="fas fa-external-link-alt"></i></a>
                     </div>
                 </div>
 
                 <div class="cert-card reveal delay-2 hover-target">
-                    <div class="cert-image-wrapper">
-                        <i class="fas fa-image"></i>
+                    <div class="cert-image-wrapper hover-target">
+                        <i class="fas fa-image placeholder-icon"></i>
+                        <div class="cert-image-overlay"><i class="fas fa-search-plus"></i></div>
                         <img src="Cert9.jpg" alt="Capstone Certificate" onerror="this.style.display='none'">
                     </div>
                     <div class="cert-info">
                         <h4>Capstone: Applying Project Mgt in the Real World</h4>
                         <p>Coursera</p>
-                        <a href="#" class="cert-link hover-target">View Credential <i class="fas fa-external-link-alt"></i></a>
                     </div>
                 </div>
 
@@ -661,6 +746,11 @@
         </footer>
     </div>
 
+    <div id="imageModal" class="modal">
+        <span class="close-modal">&times;</span>
+        <img class="modal-content" id="expandedImg">
+    </div>
+
     <script>
         // Check if device is touch screen
         const isTouchDevice = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0) || (navigator.msMaxTouchPoints > 0);
@@ -669,7 +759,9 @@
         if (!isTouchDevice) {
             const cursorDot = document.getElementById("cursor-dot");
             const cursorOutline = document.getElementById("cursor-outline");
-            const hoverTargets = document.querySelectorAll('.hover-target, a, .skill-bubble');
+            
+            // Added .cert-image-wrapper to hover targets so the cursor expands over images
+            const hoverTargets = document.querySelectorAll('.hover-target, a, .skill-bubble, .cert-image-wrapper');
 
             window.addEventListener("mousemove", function (e) {
                 const posX = e.clientX;
@@ -737,7 +829,41 @@
             }
         }
         window.addEventListener("scroll", reveal);
-        reveal();
+        reveal(); // Trigger immediately on load
+
+        // 5. Lightbox Modal Logic for Certificates
+        const modal = document.getElementById("imageModal");
+        const modalImg = document.getElementById("expandedImg");
+        const closeBtn = document.querySelector(".close-modal");
+        
+        // Select all image wrappers
+        const certWrappers = document.querySelectorAll(".cert-image-wrapper");
+
+        certWrappers.forEach(wrapper => {
+            wrapper.addEventListener("click", function() {
+                // Find the actual image inside the clicked wrapper
+                const imgInside = this.querySelector("img");
+                
+                // Only open modal if the image source actually loaded (is not hidden)
+                if(imgInside && imgInside.style.display !== 'none') {
+                    modal.classList.add("show");
+                    modalImg.src = imgInside.src;
+                }
+            });
+        });
+
+        // Close when clicking the X
+        closeBtn.addEventListener("click", function() {
+            modal.classList.remove("show");
+        });
+
+        // Close when clicking anywhere on the dark background
+        modal.addEventListener("click", function(e) {
+            if (e.target === modal) {
+                modal.classList.remove("show");
+            }
+        });
+
     </script>
 </body>
 </html>
