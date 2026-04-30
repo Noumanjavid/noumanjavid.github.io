@@ -60,6 +60,12 @@
         .hero-text h2 { font-size: 1.2rem; color: var(--primary); font-weight: 500; margin-bottom: 0.5rem; letter-spacing: 2px; text-transform: uppercase; }
         .hero-text h1 { font-size: 4.5rem; line-height: 1.1; font-weight: 800; margin-bottom: 1.5rem; }
         .hero-text p { font-size: 1.1rem; color: var(--text-muted); margin-bottom: 2.5rem; max-width: 90%; }
+        
+        .name-gradient {
+            background: linear-gradient(to right, var(--primary), var(--accent1));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
 
         .contact-pills { display: flex; flex-wrap: wrap; gap: 1rem; }
         .contact-pill { display: inline-flex; align-items: center; gap: 0.8rem; background: var(--glass-bg); border: 1px solid var(--glass-border); padding: 0.8rem 1.5rem; border-radius: 40px; font-size: 0.9rem; backdrop-filter: blur(10px); transition: 0.3s; }
@@ -177,7 +183,7 @@
         <section class="hero" id="home">
             <div class="hero-text">
                 <h2 class="fade-in">Project Management Portfolio</h2>
-                <h1 class="fade-in delay-1">I am Muhammad <br>Nouman.</h1>
+                <h1 class="fade-in delay-1">I am <br><span class="name-gradient">Muhammad <br>Nouman.</span></h1>
                 <p class="fade-in delay-2">Bridging the gap between strategy and execution. Dedicated BS Project Management student with hands-on expertise in MS Project, operations, and global summit coordination.</p>
                 
                 <div class="contact-pills fade-in delay-3">
