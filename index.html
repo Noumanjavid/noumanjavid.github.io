@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Muhammad Nouman | Portfolio</title>
+    <title>Muhammad Nouman | Project Portfolio</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
@@ -18,487 +18,135 @@
             --glass-border: rgba(255, 255, 255, 0.1);
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Poppins', sans-serif;
-            cursor: none;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; cursor: none; }
+        html { scroll-behavior: smooth; overflow-x: hidden; }
+        body { background-color: #050505; color: var(--text-main); line-height: 1.7; overflow-x: hidden; position: relative; }
 
-        html {
-            scroll-behavior: smooth;
-            overflow-x: hidden;
-        }
-
-        body {
-            background-color: #050505;
-            color: var(--text-main);
-            line-height: 1.7;
-            overflow-x: hidden;
-            position: relative;
-        }
-
+        /* Animated Background */
         .bg-animation {
-            position: fixed;
-            top: -50%; left: -50%; width: 200%; height: 200%;
+            position: fixed; top: -50%; left: -50%; width: 200%; height: 200%;
             background: radial-gradient(circle at 50% 50%, rgba(79, 172, 254, 0.15), transparent 60%),
                         radial-gradient(circle at 80% 20%, rgba(240, 147, 251, 0.15), transparent 50%),
                         radial-gradient(circle at 20% 80%, rgba(0, 242, 254, 0.15), transparent 50%);
-            z-index: -1;
-            animation: bgFlow 20s infinite linear alternate;
-            filter: blur(60px);
+            z-index: -1; animation: bgFlow 20s infinite linear alternate; filter: blur(60px);
         }
+        @keyframes bgFlow { 0% { transform: rotate(0deg) scale(1); } 100% { transform: rotate(360deg) scale(1.2); } }
 
-        @keyframes bgFlow {
-            0% { transform: rotate(0deg) scale(1); }
-            50% { transform: rotate(180deg) scale(1.2); }
-            100% { transform: rotate(360deg) scale(1); }
-        }
+        /* Custom Cursor */
+        .cursor-dot { width: 8px; height: 8px; background: var(--primary); border-radius: 50%; position: fixed; pointer-events: none; z-index: 9999; transform: translate(-50%, -50%); transition: width 0.2s, height 0.2s; }
+        .cursor-outline { width: 40px; height: 40px; border: 2px solid rgba(0, 242, 254, 0.5); border-radius: 50%; position: fixed; pointer-events: none; z-index: 9998; transform: translate(-50%, -50%); transition: width 0.2s, height 0.2s; transition-timing-function: ease-out; }
+        @media (hover: none) { .cursor-dot, .cursor-outline { display: none; } * { cursor: auto; } }
 
-        .cursor-dot {
-            width: 8px; height: 8px;
-            background: var(--primary);
-            border-radius: 50%;
-            position: fixed;
-            pointer-events: none;
-            z-index: 9999;
-            transform: translate(-50%, -50%);
-            transition: width 0.2s, height 0.2s, background 0.2s;
-        }
-        .cursor-outline {
-            width: 40px; height: 40px;
-            border: 2px solid rgba(0, 242, 254, 0.5);
-            border-radius: 50%;
-            position: fixed;
-            pointer-events: none;
-            z-index: 9998;
-            transform: translate(-50%, -50%);
-            transition: width 0.2s, height 0.2s, border-color 0.2s;
-            transition-timing-function: ease-out;
-        }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 1.5rem; position: relative; }
 
-        @media (hover: none) and (pointer: coarse) {
-            .cursor-dot, .cursor-outline { display: none !important; }
-            * { cursor: auto !important; }
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 1.5rem;
-            position: relative;
-        }
-
-        header {
-            position: fixed;
-            top: 0; left: 0; width: 100%;
-            padding: 1.5rem 0;
-            z-index: 1000;
-            transition: all 0.4s ease;
-        }
-        header.scrolled {
-            background: rgba(10, 10, 15, 0.85);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border-bottom: 1px solid var(--glass-border);
-            padding: 1rem 0;
-        }
-        nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        .logo {
-            font-size: 1.8rem;
-            font-weight: 800;
-            background: linear-gradient(to right, var(--primary), var(--accent1));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            letter-spacing: 1px;
-        }
-        .nav-links {
-            display: flex;
-            gap: 2.5rem;
-            list-style: none;
-        }
-        .nav-links a {
-            color: var(--text-muted);
-            text-decoration: none;
-            font-weight: 500;
-            font-size: 0.95rem;
-            transition: color 0.3s ease;
-            position: relative;
-        }
-        .nav-links a::after {
-            content: ''; position: absolute;
-            bottom: -5px; left: 50%; width: 0; height: 2px;
-            background: var(--primary);
-            transition: all 0.3s ease;
-            transform: translateX(-50%);
-        }
+        /* Header */
+        header { position: fixed; top: 0; left: 0; width: 100%; padding: 1.5rem 0; z-index: 1000; transition: 0.4s; }
+        header.scrolled { background: rgba(10, 10, 15, 0.85); backdrop-filter: blur(20px); border-bottom: 1px solid var(--glass-border); padding: 1rem 0; }
+        nav { display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-size: 1.8rem; font-weight: 800; background: linear-gradient(to right, var(--primary), var(--accent1)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; letter-spacing: 1px; }
+        .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+        .nav-links a { color: var(--text-muted); text-decoration: none; font-weight: 500; font-size: 0.95rem; transition: 0.3s; position: relative; }
+        .nav-links a::after { content: ''; position: absolute; bottom: -5px; left: 50%; width: 0; height: 2px; background: var(--primary); transition: 0.3s; transform: translateX(-50%); }
         .nav-links a:hover { color: var(--text-main); }
         .nav-links a:hover::after { width: 100%; }
 
-        @keyframes loadFadeUp {
-            from { opacity: 0; transform: translateY(40px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        .fade-in {
-            opacity: 0;
-            animation: loadFadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-        }
-        .delay-1 { animation-delay: 0.1s; }
-        .delay-2 { animation-delay: 0.2s; }
-        .delay-3 { animation-delay: 0.3s; }
+        /* Hero Section */
+        .fade-in { opacity: 0; animation: loadFadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+        @keyframes loadFadeUp { from { opacity: 0; transform: translateY(40px); } to { opacity: 1; transform: translateY(0); } }
+        .delay-1 { animation-delay: 0.1s; } .delay-2 { animation-delay: 0.2s; } .delay-3 { animation-delay: 0.3s; }
 
-        .hero {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding-top: 80px;
-            gap: 4rem;
-        }
-
+        .hero { min-height: 100vh; display: flex; align-items: center; justify-content: space-between; padding-top: 80px; gap: 4rem; }
         .hero-text { flex: 1; }
-        .hero-text h2 {
-            font-size: 1.2rem;
-            color: var(--primary);
-            font-weight: 500;
-            margin-bottom: 0.5rem;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-        }
-        .hero-text h1 {
-            font-size: 4.5rem;
-            line-height: 1.1;
-            font-weight: 800;
-            margin-bottom: 1.5rem;
-        }
-        .hero-text p {
-            font-size: 1.1rem;
-            color: var(--text-muted);
-            margin-bottom: 2.5rem;
-            max-width: 90%;
-        }
+        .hero-text h2 { font-size: 1.2rem; color: var(--primary); font-weight: 500; margin-bottom: 0.5rem; letter-spacing: 2px; text-transform: uppercase; }
+        .hero-text h1 { font-size: 4.5rem; line-height: 1.1; font-weight: 800; margin-bottom: 1.5rem; }
+        .hero-text p { font-size: 1.1rem; color: var(--text-muted); margin-bottom: 2.5rem; max-width: 90%; }
 
-        .contact-pills {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 1rem;
-        }
-        .contact-pill {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.8rem;
-            background: var(--glass-bg);
-            border: 1px solid var(--glass-border);
-            padding: 0.8rem 1.5rem;
-            border-radius: 40px;
-            font-size: 0.9rem;
-            backdrop-filter: blur(10px);
-            transition: all 0.3s ease;
-        }
+        .contact-pills { display: flex; flex-wrap: wrap; gap: 1rem; }
+        .contact-pill { display: inline-flex; align-items: center; gap: 0.8rem; background: var(--glass-bg); border: 1px solid var(--glass-border); padding: 0.8rem 1.5rem; border-radius: 40px; font-size: 0.9rem; backdrop-filter: blur(10px); transition: 0.3s; }
         .contact-pill i { color: var(--primary); font-size: 1.2rem; }
-        .contact-pill:hover {
-            transform: translateY(-5px);
-            background: rgba(255, 255, 255, 0.1);
-            border-color: var(--primary);
-            box-shadow: 0 10px 20px rgba(0, 242, 254, 0.2);
-        }
+        .contact-pill:hover { transform: translateY(-5px); background: rgba(255, 255, 255, 0.1); border-color: var(--primary); box-shadow: 0 10px 20px rgba(0, 242, 254, 0.2); }
 
-        .hero-image-container {
-            flex: 1;
-            display: flex;
-            justify-content: center;
-            perspective: 1000px;
-        }
-        .profile-wrapper {
-            width: 380px; height: 380px;
-            border-radius: 50%;
-            padding: 8px;
-            background: linear-gradient(45deg, var(--primary), var(--secondary), var(--accent1), var(--accent2));
-            background-size: 400% 400%;
-            animation: gradientRing 8s ease infinite;
-            box-shadow: 0 0 50px rgba(79, 172, 254, 0.3);
-            transform-style: preserve-3d;
-            transition: transform 0.1s ease;
-        }
-        .profile-img {
-            width: 100%; height: 100%;
-            border-radius: 50%;
-            border: 6px solid #ffffff;
-            object-fit: cover;
-            transform: translateZ(30px);
-        }
+        .hero-image-container { flex: 1; display: flex; justify-content: center; perspective: 1000px; }
+        .profile-wrapper { width: 380px; height: 380px; border-radius: 50%; padding: 8px; background: linear-gradient(45deg, var(--primary), var(--secondary), var(--accent1), var(--accent2)); background-size: 400%; animation: gradientRing 8s infinite; transform-style: preserve-3d; transition: 0.1s; }
+        .profile-img { width: 100%; height: 100%; border-radius: 50%; border: 6px solid #ffffff; object-fit: cover; transform: translateZ(30px); }
+        @keyframes gradientRing { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
 
-        /* FIXED: Centered Header Styling */
-        .section-header-container {
-            width: 100%;
-            text-align: center;
-            margin-top: 5rem;
-            margin-bottom: 3rem;
-        }
+        /* Centered Section Headers */
+        .section-header-container { width: 100%; text-align: center; margin-top: 5rem; margin-bottom: 3rem; }
+        .section-title { font-size: 2.5rem; font-weight: 700; display: inline-block; position: relative; }
+        .section-title::after { content: ''; position: absolute; bottom: -10px; left: 20%; width: 60%; height: 4px; background: linear-gradient(to right, transparent, var(--primary), transparent); border-radius: 2px; }
 
-        .section-title {
-            font-size: 2.5rem;
-            font-weight: 700;
-            display: inline-block;
-            position: relative;
-        }
-        .section-title::after {
-            content: '';
-            position: absolute;
-            bottom: -10px; left: 20%; width: 60%; height: 4px;
-            background: linear-gradient(to right, transparent, var(--primary), transparent);
-            border-radius: 2px;
-        }
+        /* Glass Panels */
+        .glass-panel { background: var(--glass-bg); backdrop-filter: blur(16px); border: 1px solid var(--glass-border); border-radius: 24px; padding: 3rem; margin-bottom: 2rem; box-shadow: 0 15px 35px rgba(0,0,0,0.2); transition: 0.4s; }
+        .glass-panel:hover { transform: translateY(-5px); box-shadow: 0 20px 40px rgba(0, 242, 254, 0.1); border-color: rgba(0, 242, 254, 0.3); }
 
-        .glass-panel {
-            background: var(--glass-bg);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border: 1px solid var(--glass-border);
-            border-radius: 24px;
-            padding: 3rem;
-            margin-bottom: 2rem;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
-            transition: transform 0.4s ease, box-shadow 0.4s ease;
-        }
-        .glass-panel:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 20px 40px rgba(0, 242, 254, 0.1);
-            border-color: rgba(0, 242, 254, 0.3);
-        }
-
-        .timeline {
-            position: relative;
-            padding-left: 2rem;
-        }
-        .timeline::before {
-            content: '';
-            position: absolute;
-            left: 0; top: 0; width: 2px; height: 100%;
-            background: linear-gradient(to bottom, var(--primary), var(--accent1));
-            border-radius: 2px;
-        }
-        .timeline-node {
-            position: absolute;
-            left: -6px; top: 0;
-            width: 14px; height: 14px;
-            background: var(--primary);
-            border-radius: 50%;
-            box-shadow: 0 0 15px var(--primary);
-        }
+        /* Timeline */
+        .timeline { position: relative; padding-left: 2rem; }
+        .timeline::before { content: ''; position: absolute; left: 0; top: 0; width: 2px; height: 100%; background: linear-gradient(to bottom, var(--primary), var(--accent1)); border-radius: 2px; }
+        .timeline-node { position: absolute; left: -6px; top: 0; width: 14px; height: 14px; background: var(--primary); border-radius: 50%; box-shadow: 0 0 15px var(--primary); }
         .timeline-content h3 { font-size: 1.5rem; margin-bottom: 0.2rem; }
         .timeline-content span { color: var(--primary); font-weight: 600; display: block; margin-bottom: 1rem; }
         .timeline-content ul { list-style: none; color: var(--text-muted); }
         .timeline-content li { margin-bottom: 0.8rem; position: relative; padding-left: 1.5rem; }
-        .timeline-content li::before {
-            content: '✦'; position: absolute; left: 0; color: var(--accent1); font-size: 0.8rem; top: 4px;
-        }
+        .timeline-content li::before { content: '✦'; position: absolute; left: 0; color: var(--accent1); font-size: 0.8rem; top: 4px; }
 
-        .skills-wrapper {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 1.2rem;
-            justify-content: center;
-        }
-        .skill-bubble {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            padding: 1rem 2rem;
-            border-radius: 50px;
-            font-size: 1rem;
-            font-weight: 500;
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            backdrop-filter: blur(5px);
-        }
-        .skill-bubble:hover {
-            background: var(--primary);
-            color: #000;
-            transform: scale(1.1) translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0, 242, 254, 0.4);
-            border-color: transparent;
-        }
+        /* Skills */
+        .skills-wrapper { display: flex; flex-wrap: wrap; gap: 1.2rem; justify-content: center; }
+        .skill-bubble { background: rgba(255, 255, 255, 0.05); border: 1px solid var(--glass-border); padding: 1rem 2rem; border-radius: 50px; font-size: 1rem; font-weight: 500; transition: 0.4s; backdrop-filter: blur(5px); }
+        .skill-bubble:hover { background: var(--primary); color: #000; transform: scale(1.1) translateY(-5px); border-color: transparent; }
 
-        .cert-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 2rem;
-        }
-        .cert-card {
-            background: rgba(255, 255, 255, 0.02);
-            border: 1px solid var(--glass-border);
-            border-radius: 16px;
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
-            transition: all 0.4s ease;
-        }
-        .cert-card:hover {
-            background: rgba(255, 255, 255, 0.05);
-            transform: translateY(-8px);
-            border-color: var(--accent1);
-            box-shadow: 0 15px 30px rgba(240, 147, 251, 0.15);
-        }
+        /* Grids for Projects and Certs */
+        .grid-layout { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2rem; }
+        .visual-card { background: rgba(255, 255, 255, 0.02); border: 1px solid var(--glass-border); border-radius: 16px; overflow: hidden; display: flex; flex-direction: column; transition: 0.4s; }
+        .visual-card:hover { background: rgba(255, 255, 255, 0.05); transform: translateY(-8px); border-color: var(--accent1); box-shadow: 0 15px 30px rgba(240, 147, 251, 0.15); }
         
-        .cert-image-wrapper {
-            width: 100%;
-            height: 200px;
-            overflow: hidden;
-            border-bottom: 1px solid var(--glass-border);
-            position: relative;
-            background-color: #111; 
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-        }
+        .visual-img-wrapper { width: 100%; height: 200px; overflow: hidden; border-bottom: 1px solid var(--glass-border); position: relative; background-color: #111; display: flex; align-items: center; justify-content: center; cursor: pointer; }
         
-        .cert-image-overlay {
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0, 0, 0, 0.5);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-            z-index: 3;
-        }
-        
-        .cert-image-overlay i {
-            color: #fff;
-            font-size: 2.5rem;
-            transform: scale(0.5);
-            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
+        .visual-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.5); display: flex; align-items: center; justify-content: center; opacity: 0; transition: 0.3s; z-index: 3; }
+        .visual-overlay i { color: #fff; font-size: 2.5rem; transform: scale(0.5); transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+        .visual-img-wrapper:hover .visual-overlay { opacity: 1; }
+        .visual-img-wrapper:hover .visual-overlay i { transform: scale(1); }
 
-        .cert-image-wrapper:hover .cert-image-overlay { opacity: 1; }
-        .cert-image-wrapper:hover .cert-image-overlay i { transform: scale(1); }
+        .visual-img-wrapper .placeholder-icon { font-size: 3rem; color: rgba(255,255,255,0.2); position: absolute; z-index: 1; }
+        .visual-img-wrapper img { width: 100%; height: 100%; object-fit: cover; position: relative; z-index: 2; transition: 0.5s; }
+        .visual-card:hover .visual-img-wrapper img { transform: scale(1.08); }
 
-        .cert-image-wrapper .placeholder-icon {
-            font-size: 3rem;
-            color: rgba(255,255,255,0.2);
-            position: absolute;
-            z-index: 1;
-        }
+        .visual-info { padding: 1.5rem; display: flex; flex-direction: column; flex: 1; }
+        .visual-info h4 { font-size: 1.1rem; font-weight: 600; line-height: 1.4; margin-bottom: 0.5rem; }
+        .visual-info p { font-size: 0.85rem; color: var(--accent1); text-transform: uppercase; letter-spacing: 1px; font-weight: 500; margin-bottom: 1rem; }
+        .visual-info .desc { color: var(--text-muted); font-size: 0.95rem; text-transform: none; letter-spacing: normal; font-weight: 400; }
 
-        .cert-image-wrapper img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            position: relative;
-            z-index: 2;
-            transition: transform 0.5s ease;
-        }
-        .cert-card:hover .cert-image-wrapper img { transform: scale(1.08); }
-
-        .cert-info { 
-            padding: 1.5rem; 
-            display: flex;
-            flex-direction: column;
-            flex: 1;
-        }
-        .cert-info h4 { 
-            font-size: 1.1rem; 
-            font-weight: 600; 
-            line-height: 1.4; 
-            margin-bottom: 0.5rem; 
-        }
-        .cert-info p { 
-            font-size: 0.85rem; 
-            color: var(--accent1); 
-            text-transform: uppercase; 
-            letter-spacing: 1px; 
-            font-weight: 500; 
-            margin-bottom: 1rem;
-        }
-        
-        .modal {
-            display: none; 
-            align-items: center;
-            justify-content: center;
-            position: fixed;
-            z-index: 10000;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.9);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-
-        .modal.show {
-            display: flex;
-            opacity: 1;
-        }
-
-        .modal-content {
-            max-width: 90%;
-            max-height: 85vh;
-            border-radius: 12px;
-            box-shadow: 0 0 40px rgba(0, 242, 254, 0.2);
-            transform: scale(0.8);
-            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            object-fit: contain;
-        }
-
+        /* Lightbox Modal */
+        .modal { display: none; align-items: center; justify-content: center; position: fixed; z-index: 10000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.9); backdrop-filter: blur(10px); opacity: 0; transition: 0.3s; }
+        .modal.show { display: flex; opacity: 1; }
+        .modal-content { max-width: 90%; max-height: 85vh; border-radius: 12px; box-shadow: 0 0 40px rgba(0, 242, 254, 0.2); transform: scale(0.8); transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); object-fit: contain; }
         .modal.show .modal-content { transform: scale(1); }
-
-        .close-modal {
-            position: absolute;
-            top: 30px;
-            right: 40px;
-            color: #fff;
-            font-size: 40px;
-            font-weight: bold;
-            transition: 0.3s;
-            z-index: 10001;
-            cursor: pointer;
-        }
+        .close-modal { position: absolute; top: 30px; right: 40px; color: #fff; font-size: 40px; font-weight: bold; transition: 0.3s; z-index: 10001; cursor: pointer; }
         .close-modal:hover { color: var(--primary); transform: scale(1.2); }
 
-        .reveal {
-            opacity: 0;
-            transform: translateY(40px);
-            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-        .reveal.active {
-            opacity: 1;
-            transform: translateY(0);
-        }
+        /* Animations */
+        .reveal { opacity: 0; transform: translateY(40px); transition: 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
+        .reveal.active { opacity: 1; transform: translateY(0); }
 
-        footer {
-            text-align: center;
-            padding: 3rem 0;
-            color: var(--text-muted);
-            border-top: 1px solid var(--glass-border);
-            margin-top: 4rem;
-        }
+        footer { text-align: center; padding: 3rem 0; color: var(--text-muted); border-top: 1px solid var(--glass-border); margin-top: 4rem; }
 
+        /* Responsive */
         @media (max-width: 992px) {
             .hero { flex-direction: column-reverse; text-align: center; padding-top: 120px; gap: 2.5rem; }
             .hero-text p { max-width: 100%; margin: 0 auto 2rem auto; }
             .contact-pills { justify-content: center; }
             .nav-links { display: none; }
             .profile-wrapper { width: 300px; height: 300px; margin: 0 auto; }
+            .grid-2-col { grid-template-columns: 1fr !important; }
         }
-
         @media (max-width: 768px) {
             .hero-text h1 { font-size: 3rem; }
             .section-title { font-size: 2rem; }
             .glass-panel { padding: 1.5rem; }
             .profile-wrapper { width: 250px; height: 250px; }
-            .cert-grid { grid-template-columns: 1fr; }
+            .grid-layout { grid-template-columns: 1fr; }
             .timeline-content h3 { font-size: 1.2rem; }
             .close-modal { top: 15px; right: 20px; font-size: 30px; }
-            .grid-2-col { grid-template-columns: 1fr !important; }
         }
     </style>
 </head>
@@ -515,6 +163,7 @@
                 <div class="logo">Nouman</div>
                 <ul class="nav-links">
                     <li><a href="#home" class="hover-target">Home</a></li>
+                    <li><a href="#projects" class="hover-target">Projects</a></li>
                     <li><a href="#experience" class="hover-target">Experience</a></li>
                     <li><a href="#skills" class="hover-target">Skills</a></li>
                     <li><a href="#certifications" class="hover-target">Certifications</a></li>
@@ -524,11 +173,12 @@
     </header>
 
     <div class="container">
+        <!-- Hero Section -->
         <section class="hero" id="home">
             <div class="hero-text">
-                <h2 class="fade-in">Welcome to my universe</h2>
+                <h2 class="fade-in">Project Management Portfolio</h2>
                 <h1 class="fade-in delay-1">I am Muhammad <br>Nouman.</h1>
-                <p class="fade-in delay-2">A dedicated Project Management student blending academic foundation with hands-on operational leadership. I turn complex ideas into structured, high-impact reality.</p>
+                <p class="fade-in delay-2">Bridging the gap between strategy and execution. Dedicated BS Project Management student with hands-on expertise in MS Project, operations, and global summit coordination.</p>
                 
                 <div class="contact-pills fade-in delay-3">
                     <a href="mailto:numanjan5257@gmail.com" style="text-decoration: none; color: inherit;">
@@ -546,6 +196,7 @@
             </div>
         </section>
 
+        <!-- Education & Goals -->
         <div class="grid-2-col" style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 2rem;">
             <div class="glass-panel reveal hover-target">
                 <h3 style="color: var(--primary); margin-bottom: 1rem; font-size: 1.3rem;"><i class="fas fa-bullseye"></i> Career Goal</h3>
@@ -561,7 +212,39 @@
             </div>
         </div>
 
-        <div class="section-header-container">
+        <!-- Featured Projects -->
+        <div class="section-header-container" id="projects">
+            <h2 class="section-title reveal">Featured Projects</h2>
+        </div>
+        <div class="grid-layout">
+            <!-- Project 1 -->
+            <div class="visual-card reveal hover-target">
+                <div class="visual-img-wrapper hover-target">
+                    <i class="fas fa-image placeholder-icon"></i>
+                    <div class="visual-overlay"><i class="fas fa-search-plus"></i></div>
+                    <img src="project1.jpg" alt="XLab Schedule" onerror="this.style.display='none'">
+                </div>
+                <div class="visual-info">
+                    <h4>XLab: Global Experience Summit</h4>
+                    <p class="desc">Full project lifecycle schedule developed in MS Project, including resource allocation and critical path planning.</p>
+                </div>
+            </div>
+            <!-- Project 2: Risk Register -->
+            <div class="visual-card reveal delay-1 hover-target">
+                <div class="visual-img-wrapper hover-target">
+                    <i class="fas fa-image placeholder-icon"></i>
+                    <div class="visual-overlay"><i class="fas fa-search-plus"></i></div>
+                    <img src="project2.jpg" alt="Risk Register" onerror="this.style.display='none'">
+                </div>
+                <div class="visual-info">
+                    <h4>Quantitative Risk Register</h4>
+                    <p class="desc">Detailed log of identified threats and opportunities with proactive mitigation strategies and impact scoring.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Experience Timeline -->
+        <div class="section-header-container" id="experience">
             <h2 class="section-title reveal">My Journey</h2>
         </div>
         <div class="glass-panel reveal">
@@ -580,7 +263,8 @@
             </div>
         </div>
 
-        <div class="section-header-container">
+        <!-- Core Competencies -->
+        <div class="section-header-container" id="skills">
             <h2 class="section-title reveal">Core Competencies</h2>
         </div>
         <div class="skills-wrapper reveal delay-1">
@@ -594,7 +278,8 @@
             <div class="skill-bubble hover-target">Change Management</div>
         </div>
 
-        <div class="section-header-container">
+        <!-- Languages Section -->
+        <div class="section-header-container" id="languages">
             <h2 class="section-title reveal">Languages</h2>
         </div>
         <div class="skills-wrapper reveal delay-1">
@@ -602,108 +287,81 @@
             <div class="skill-bubble hover-target" style="border-color: var(--accent1); background: rgba(240, 147, 251, 0.05);">Urdu</div>
         </div>
 
-        <div class="section-header-container">
+        <!-- Certifications (All 9) -->
+        <div class="section-header-container" id="certifications">
             <h2 class="section-title reveal">Certifications</h2>
         </div>
-        <div class="cert-grid">
-            <div class="cert-card reveal hover-target">
-                <div class="cert-image-wrapper hover-target">
-                    <i class="fas fa-image placeholder-icon"></i>
-                    <div class="cert-image-overlay"><i class="fas fa-search-plus"></i></div>
+        <div class="grid-layout">
+            <div class="visual-card reveal hover-target">
+                <div class="visual-img-wrapper hover-target">
+                    <i class="fas fa-image placeholder-icon"></i><div class="visual-overlay"><i class="fas fa-search-plus"></i></div>
                     <img src="Cert1.jpg" alt="Aha! Product Management Certificate" onerror="this.style.display='none'"> 
                 </div>
-                <div class="cert-info">
-                    <h4>Aha! Product Management Certificate</h4>
-                    <p>LinkedIn Learning</p>
-                </div>
+                <div class="visual-info"><h4>Aha! Product Management Certificate</h4><p>LinkedIn Learning</p></div>
             </div>
-            <div class="cert-card reveal delay-1 hover-target">
-                <div class="cert-image-wrapper hover-target">
-                    <i class="fas fa-image placeholder-icon"></i>
-                    <div class="cert-image-overlay"><i class="fas fa-search-plus"></i></div>
+
+            <div class="visual-card reveal delay-1 hover-target">
+                <div class="visual-img-wrapper hover-target">
+                    <i class="fas fa-image placeholder-icon"></i><div class="visual-overlay"><i class="fas fa-search-plus"></i></div>
                     <img src="Cert2.jpg" alt="Notion Dashboard Certificate" onerror="this.style.display='none'">
                 </div>
-                <div class="cert-info">
-                    <h4>Notion: Build a Project Management Dashboard</h4>
-                    <p>LinkedIn Learning</p>
-                </div>
+                <div class="visual-info"><h4>Notion: Build a Project Management Dashboard</h4><p>LinkedIn Learning</p></div>
             </div>
-            <div class="cert-card reveal delay-2 hover-target">
-                <div class="cert-image-wrapper hover-target">
-                    <i class="fas fa-image placeholder-icon"></i>
-                    <div class="cert-image-overlay"><i class="fas fa-search-plus"></i></div>
+
+            <div class="visual-card reveal delay-2 hover-target">
+                <div class="visual-img-wrapper hover-target">
+                    <i class="fas fa-image placeholder-icon"></i><div class="visual-overlay"><i class="fas fa-search-plus"></i></div>
                     <img src="Cert3.jpg" alt="Budgets Certificate" onerror="this.style.display='none'">
                 </div>
-                <div class="cert-info">
-                    <h4>Project Management Foundations: Budgets</h4>
-                    <p>LinkedIn Learning</p>
-                </div>
+                <div class="visual-info"><h4>Project Management Foundations: Budgets</h4><p>LinkedIn Learning</p></div>
             </div>
-            <div class="cert-card reveal hover-target">
-                <div class="cert-image-wrapper hover-target">
-                    <i class="fas fa-image placeholder-icon"></i>
-                    <div class="cert-image-overlay"><i class="fas fa-search-plus"></i></div>
+
+            <div class="visual-card reveal hover-target">
+                <div class="visual-img-wrapper hover-target">
+                    <i class="fas fa-image placeholder-icon"></i><div class="visual-overlay"><i class="fas fa-search-plus"></i></div>
                     <img src="Cert4.jpg" alt="Requirements Certificate" onerror="this.style.display='none'">
                 </div>
-                <div class="cert-info">
-                    <h4>Project Management Foundations: Requirements</h4>
-                    <p>LinkedIn Learning</p>
-                </div>
+                <div class="visual-info"><h4>Project Management Foundations: Requirements</h4><p>LinkedIn Learning</p></div>
             </div>
-            <div class="cert-card reveal delay-1 hover-target">
-                <div class="cert-image-wrapper hover-target">
-                    <i class="fas fa-image placeholder-icon"></i>
-                    <div class="cert-image-overlay"><i class="fas fa-search-plus"></i></div>
+
+            <div class="visual-card reveal delay-1 hover-target">
+                <div class="visual-img-wrapper hover-target">
+                    <i class="fas fa-image placeholder-icon"></i><div class="visual-overlay"><i class="fas fa-search-plus"></i></div>
                     <img src="Cert5.jpg" alt="Stakeholders Certificate" onerror="this.style.display='none'">
                 </div>
-                <div class="cert-info">
-                    <h4>Managing Project Stakeholders</h4>
-                    <p>LinkedIn Learning</p>
-                </div>
+                <div class="visual-info"><h4>Managing Project Stakeholders</h4><p>LinkedIn Learning</p></div>
             </div>
-            <div class="cert-card reveal delay-2 hover-target">
-                <div class="cert-image-wrapper hover-target">
-                    <i class="fas fa-image placeholder-icon"></i>
-                    <div class="cert-image-overlay"><i class="fas fa-search-plus"></i></div>
+
+            <div class="visual-card reveal delay-2 hover-target">
+                <div class="visual-img-wrapper hover-target">
+                    <i class="fas fa-image placeholder-icon"></i><div class="visual-overlay"><i class="fas fa-search-plus"></i></div>
                     <img src="Cert6.jpg" alt="Foundations Coursera Certificate" onerror="this.style.display='none'">
                 </div>
-                <div class="cert-info">
-                    <h4>Foundations of Project Management</h4>
-                    <p>Coursera</p>
-                </div>
+                <div class="visual-info"><h4>Foundations of Project Management</h4><p>Coursera</p></div>
             </div>
-            <div class="cert-card reveal hover-target">
-                <div class="cert-image-wrapper hover-target">
-                    <i class="fas fa-image placeholder-icon"></i>
-                    <div class="cert-image-overlay"><i class="fas fa-search-plus"></i></div>
+
+            <div class="visual-card reveal hover-target">
+                <div class="visual-img-wrapper hover-target">
+                    <i class="fas fa-image placeholder-icon"></i><div class="visual-overlay"><i class="fas fa-search-plus"></i></div>
                     <img src="Cert7.jpg" alt="Project Initiation Certificate" onerror="this.style.display='none'">
                 </div>
-                <div class="cert-info">
-                    <h4>Project Initiation: Starting a Successful Project</h4>
-                    <p>Coursera</p>
-                </div>
+                <div class="visual-info"><h4>Project Initiation: Starting a Successful Project</h4><p>Coursera</p></div>
             </div>
-            <div class="cert-card reveal delay-1 hover-target">
-                <div class="cert-image-wrapper hover-target">
-                    <i class="fas fa-image placeholder-icon"></i>
-                    <div class="cert-image-overlay"><i class="fas fa-search-plus"></i></div>
+
+            <div class="visual-card reveal delay-1 hover-target">
+                <div class="visual-img-wrapper hover-target">
+                    <i class="fas fa-image placeholder-icon"></i><div class="visual-overlay"><i class="fas fa-search-plus"></i></div>
                     <img src="Cert8.jpg" alt="Project Planning Certificate" onerror="this.style.display='none'">
                 </div>
-                <div class="cert-info">
-                    <h4>Project Planning: Putting It All Together</h4>
-                    <p>Coursera</p>
-                </div>
+                <div class="visual-info"><h4>Project Planning: Putting It All Together</h4><p>Coursera</p></div>
             </div>
-            <div class="cert-card reveal delay-2 hover-target">
-                <div class="cert-image-wrapper hover-target">
-                    <i class="fas fa-image placeholder-icon"></i>
-                    <div class="cert-image-overlay"><i class="fas fa-search-plus"></i></div>
+
+            <div class="visual-card reveal delay-2 hover-target">
+                <div class="visual-img-wrapper hover-target">
+                    <i class="fas fa-image placeholder-icon"></i><div class="visual-overlay"><i class="fas fa-search-plus"></i></div>
                     <img src="Cert9.jpg" alt="Capstone Certificate" onerror="this.style.display='none'">
                 </div>
-                <div class="cert-info">
-                    <h4>Capstone: Applying Project Mgt in the Real World</h4>
-                    <p>Coursera</p>
-                </div>
+                <div class="visual-info"><h4>Capstone: Applying Project Mgt in the Real World</h4><p>Coursera</p></div>
             </div>
         </div>
 
@@ -712,18 +370,20 @@
         </footer>
     </div>
 
+    <!-- Full Screen Image Modal -->
     <div id="imageModal" class="modal">
         <span class="close-modal">&times;</span>
         <img class="modal-content" id="expandedImg">
     </div>
 
+    <!-- Interactive Scripts -->
     <script>
         const isTouchDevice = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0) || (navigator.msMaxTouchPoints > 0);
 
         if (!isTouchDevice) {
             const cursorDot = document.getElementById("cursor-dot");
             const cursorOutline = document.getElementById("cursor-outline");
-            const hoverTargets = document.querySelectorAll('.hover-target, a, .skill-bubble, .cert-image-wrapper');
+            const hoverTargets = document.querySelectorAll('.hover-target, a, .skill-bubble, .visual-img-wrapper');
 
             window.addEventListener("mousemove", function (e) {
                 const posX = e.clientX;
@@ -762,7 +422,6 @@
                     const rotateY = ((x - centerX) / centerX) * 15;
                     profileCard.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
                 });
-
                 container.addEventListener('mouseleave', () => {
                     profileCard.style.transform = `rotateX(0deg) rotateY(0deg)`;
                 });
@@ -771,20 +430,12 @@
 
         window.addEventListener('scroll', () => {
             const header = document.getElementById('header');
-            if (window.scrollY > 50) {
-                header.classList.add('scrolled');
-            } else {
-                header.classList.remove('scrolled');
-            }
+            if (window.scrollY > 50) { header.classList.add('scrolled'); } 
+            else { header.classList.remove('scrolled'); }
         });
 
         document.addEventListener("DOMContentLoaded", function() {
-            const observerOptions = {
-                root: null,
-                rootMargin: '0px',
-                threshold: 0.15
-            };
-
+            const observerOptions = { root: null, rootMargin: '0px', threshold: 0.15 };
             const observer = new IntersectionObserver((entries, observer) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
@@ -793,18 +444,16 @@
                     }
                 });
             }, observerOptions);
-
-            document.querySelectorAll('.reveal').forEach((element) => {
-                observer.observe(element);
-            });
+            document.querySelectorAll('.reveal').forEach((element) => { observer.observe(element); });
         });
 
+        // Universal Modal Logic for both Projects and Certs
         const modal = document.getElementById("imageModal");
         const modalImg = document.getElementById("expandedImg");
         const closeBtn = document.querySelector(".close-modal");
-        const certWrappers = document.querySelectorAll(".cert-image-wrapper");
+        const visualWrappers = document.querySelectorAll(".visual-img-wrapper");
 
-        certWrappers.forEach(wrapper => {
+        visualWrappers.forEach(wrapper => {
             wrapper.addEventListener("click", function() {
                 const imgInside = this.querySelector("img");
                 if(imgInside && imgInside.style.display !== 'none') {
@@ -814,15 +463,8 @@
             });
         });
 
-        closeBtn.addEventListener("click", function() {
-            modal.classList.remove("show");
-        });
-
-        modal.addEventListener("click", function(e) {
-            if (e.target === modal) {
-                modal.classList.remove("show");
-            }
-        });
+        closeBtn.addEventListener("click", function() { modal.classList.remove("show"); });
+        modal.addEventListener("click", function(e) { if (e.target === modal) { modal.classList.remove("show"); } });
     </script>
 </body>
 </html>
